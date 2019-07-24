@@ -1,0 +1,37 @@
+{
+  "name": "backend-build",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --watch",
+    "server": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/clem9281/backend-build.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/clem9281/backend-build/issues"
+  },
+  "homepage": "https://github.com/clem9281/backend-build#readme",
+  "dependencies": {
+    "bcrypt": "^3.0.6",
+    "express": "^4.17.1",
+    "helmet": "^3.20.0",
+    "jest": "^24.8.0",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.19.1",
+    "morgan": "^1.9.1",
+    "pg": "^7.11.0",
+    "sqlite3": "^4.0.9"
+  },
+  "devDependencies": {
+    "dotenv": "^8.0.0",
+    "nodemon": "^1.19.1"
+  }
+}
