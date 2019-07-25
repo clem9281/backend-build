@@ -23,7 +23,7 @@ function findInfoBy(filter) {
 
 // add the new user and return the newly created record
 function add(user) {
-  return db("users")
+  return db("usrs")
     .insert(user, "id")
     .then(([id]) => findInfoBy({ id }));
 }
