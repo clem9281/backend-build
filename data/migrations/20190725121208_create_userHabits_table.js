@@ -18,6 +18,14 @@ exports.up = function(knex) {
       .inTable("users")
       .onDelete("CASCADE")
       .onUpdate("CASCADE");
+    tbl
+      .integer("category_id")
+      .unsigned()
+      .notNullable()
+      .references("id")
+      .inTable("categories")
+      .onDelete("CASCADE")
+      .onUpdate("CASCADE");
   });
 };
 

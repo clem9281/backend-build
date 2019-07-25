@@ -110,7 +110,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "200 OK\n{\n  \"name\": \"John\",\n  \"username\": \"John1980\"\n}",
+          "content": "200 OK\n{\n  \"name\": \"Frodo Baggins\",\n  \"username\": \"FrodoRingBearer\"\n}",
           "type": "json"
         }
       ]
