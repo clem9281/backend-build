@@ -16,7 +16,7 @@ function findBy(filter) {
 // return user object if exists, if not returns undefined
 function findInfoBy(filter) {
   return db("users")
-    .select("username")
+    .select("username", "name")
     .where(filter)
     .first();
 }

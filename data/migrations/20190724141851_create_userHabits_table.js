@@ -1,7 +1,7 @@
 exports.up = function(knex) {
   return knex.schema.createTable("userHabits", tbl => {
     tbl.increments();
-    tbl.timestamps();
+    tbl.timestamps(false, true);
     tbl
       .integer("habit_id")
       .unsigned()

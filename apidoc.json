@@ -1,0 +1,10 @@
+{
+  "name": "BackEnd Build",
+  "version": "0.1.0",
+  "description": "Express server with pg database",
+  "title": "BackEnd Build",
+  "url": "http://localhost:5000",
+  "template": {
+    "forceLanguage": "en"
+  }
+}

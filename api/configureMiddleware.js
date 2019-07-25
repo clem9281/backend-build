@@ -6,4 +6,5 @@ module.exports = server => {
   server.use(helmet());
   server.use(morgan("dev"));
   server.use(express.json());
+  server.use(express.static("doc"));
 };
