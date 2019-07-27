@@ -7,7 +7,8 @@
     "test": "cross-env process.env.DB_ENV=testing jest --watch --verbose",
     "server": "nodemon index.js",
     "start": "node index.js",
-    "apidoc": "apidoc -f backend-build/ '.*\\.js$' -e node_modules/"
+    "apidoc": "apidoc -f backend-build/ '.*\\.js$' -e node_modules/ -o apidoc/",
+    "build-docs": "apidoc-markdown -p ./apidoc/ -o README.md"
   },
   "repository": {
     "type": "git",
@@ -21,11 +22,14 @@
   },
   "homepage": "https://github.com/clem9281/backend-build#readme",
   "dependencies": {
+    "apidoc-markdown": "^0.2.1",
     "bcryptjs": "^2.4.3",
+    "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "helmet": "^3.20.0",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.19.1",
+    "knex-cleaner": "^1.2.1",
     "moment": "^2.24.0",
     "morgan": "^1.9.1",
     "path": "^0.12.7",
@@ -34,9 +38,7 @@
   },
   "devDependencies": {
     "cross-env": "^5.2.0",
-    "dotenv": "^8.0.0",
     "jest": "^24.8.0",
-    "knex-cleaner": "^1.2.1",
     "nodemon": "^1.19.1",
     "supertest": "^4.0.2"
   }
