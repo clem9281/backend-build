@@ -48,7 +48,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "200 OK\n{\n  \"token\": \"cCI6IkpXVCJ9.eyJzdWJqZWN0IjozLCJ1c2VybmFtZSI6Im5hbWUxIiwiaWF0IjoxNTY0MDc3Njc3LCJleHAiOjE1NjQxNjQwNz\"\n}",
+          "content": "200 OK\n{\n   message: `Welcome ${username}, you are logged in`,\n  \"token\": \"cCI6IkpXVCJ9.eyJzdWJqZWN0IjozLCJ1c2VybmFtZSI6Im5hbWUxIiwiaWF0IjoxNTY0MDc3Njc3LCJleHAiOjE1NjQxNjQwNz\"\n}",
           "type": "json"
         }
       ]
@@ -61,6 +61,14 @@
             "optional": false,
             "field": "BadRequest",
             "description": "<p>Required information was not supplied to request body</p>"
+          }
+        ],
+        "401": [
+          {
+            "group": "401",
+            "optional": false,
+            "field": "Unauthorized",
+            "description": "<p>That username or password is not correct.</p>"
           }
         ],
         "500": [
@@ -76,6 +84,11 @@
         {
           "title": "400 Bad Request:",
           "content": "400 Bad Request\n{\n  \"errorMessage\": \"Bad request: please include a username and password\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "400 Bad Request:",
+          "content": "401 Unauthorized\n{\n  \"errorMessage\": \"That username or password is not correct.\"\n}",
           "type": "json"
         },
         {

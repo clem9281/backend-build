@@ -28,7 +28,7 @@ router.post(
       res.status(201).json(newUser);
     } catch (error) {
       res.status(500).json({
-        errorMessage: "Something went wrong when registering the user"
+        errorMessage: "Something went wrong when registering the user."
       });
     }
   }
@@ -40,13 +40,17 @@ router.post("/login", validateSimpleUserInfoExists, async (req, res) => {
     const user = await userDb.findBy({ username });
     if (user && bcrypt.compareSync(password, user.password)) {
       const token = generateToken(user);
-      res.status(200).json({ token });
+      res
+        .status(200)
+        .json({ message: `Welcome ${username}, you are logged in`, token });
     } else {
-      res.status(401).json({ errorMessage: "Bad credentials" });
+      res
+        .status(401)
+        .json({ errorMessage: "That username or password is not correct." });
     }
   } catch (error) {
     res.status(500).json({
-      errorMessage: "Something went wrong when registering the user"
+      errorMessage: "Something went wrong when registering the user."
     });
   }
 });
@@ -109,6 +113,7 @@ module.exports = router;
  * @apiSuccessExample Success-Response:
  *     200 OK
  *     {
+ *        message: `Welcome ${username}, you are logged in`,
  *       "token": "cCI6IkpXVCJ9.eyJzdWJqZWN0IjozLCJ1c2VybmFtZSI6Im5hbWUxIiwiaWF0IjoxNTY0MDc3Njc3LCJleHAiOjE1NjQxNjQwNz"
  *     }
  *
@@ -118,6 +123,13 @@ module.exports = router;
  *     400 Bad Request
  *     {
  *       "errorMessage": "Bad request: please include a username and password"
+ *     }
+ *@apiError (401) Unauthorized That username or password is not correct.
+ *
+ * @apiErrorExample 400 Bad Request:
+ *     401 Unauthorized
+ *     {
+ *       "errorMessage": "That username or password is not correct."
  *     }
  *
  * @apiError (500) InternalServerError Something went wrong when registering the user.

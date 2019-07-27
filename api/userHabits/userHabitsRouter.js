@@ -5,17 +5,20 @@ const userHabitsDb = require("./userHabitsModel");
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
-  const user_id = req.userId;
-  try {
-    const userInfo = await userHabitsDb.findHabitsBy({ user_id });
-    res.status(200).json(userInfo);
-  } catch (error) {
-    res
-      .status(500)
-      .json({ errorMessage: "Something went wrong getting your habit info" });
-  }
-});
+router
+  .route("/")
+  .get(async (req, res) => {
+    const user_id = req.userId;
+    try {
+      const userInfo = await userHabitsDb.findHabitsBy({ user_id });
+      res.status(200).json(userInfo);
+    } catch (error) {
+      res
+        .status(500)
+        .json({ errorMessage: "Something went wrong getting your habit info" });
+    }
+  })
+  .post(async (req, res) => {});
 module.exports = router;
 
 /**
