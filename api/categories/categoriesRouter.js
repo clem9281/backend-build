@@ -1,6 +1,6 @@
 const express = require("express");
 const categoriesDb = require("./categoriesModel");
-const { categoryBody } = require("../middelware");
+const { categoryBody, categoryUnique } = require("../middelware");
 
 // DOCUMENTATION AT BOTTOM
 
@@ -18,7 +18,7 @@ router
         .json({ errorMessage: "Something went wrong getting the categories" });
     }
   })
-  .post(categoryBody, async (req, res) => {
+  .post(categoryBody, categoryUnique, async (req, res) => {
     const user_id = req.userId;
     const newCategoryInfo = req.body;
     try {

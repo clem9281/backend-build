@@ -5,5 +5,6 @@ module.exports = {
   restricted: require("./auth/restricted"),
   userHabitBody: require("./validation/requestBodyValidation/userHabitBody"),
   categoryBody: require("./validation/requestBodyValidation/categoryBody"),
-  habitBody: require("./validation/requestBodyValidation/habitBody")
+  habitBody: require("./validation/requestBodyValidation/habitBody"),
+  categoryUnique: require("./validation/uniquenessValidation/categoryUnique")
 };
