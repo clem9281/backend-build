@@ -143,13 +143,13 @@ module.exports = router;
  *        },
  *      ]
  *
- * @apiError (4xx) BadRequest: Please include the category_name of the category you want to add
+ * @apiError (4xx) BadRequest: Either the category name is not unique or you don't have the category_name property on the request
  * @apiErrorExample 400 Bad Request:
  *     400 Bad Request
  *     {
  *       "errorMessage": "Bad Request: Please include the category_name of the category you want to add."
  *     }
- * @apiError (4xx) Bad Request: Bad request: that category already exists and cannot be added
+ 
  * @apiErrorExample 400 Bad Request:
  *     400 Bad Request
  *     {

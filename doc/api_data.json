@@ -272,13 +272,7 @@
             "group": "4xx",
             "optional": false,
             "field": "BadRequest:",
-            "description": "<p>Please include the category_name of the category you want to add</p>"
-          },
-          {
-            "group": "4xx",
-            "optional": false,
-            "field": "Bad",
-            "description": "<p>Request: Bad request: that category already exists and cannot be added</p>"
+            "description": "<p>Either the category name is not unique or you don't have the category_name property on the request</p>"
           },
           {
             "group": "4xx",
@@ -554,14 +548,6 @@
     },
     "error": {
       "fields": {
-        "401": [
-          {
-            "group": "401",
-            "optional": false,
-            "field": "Unauthorized:",
-            "description": "<p>You don't have authorization for this request</p>"
-          }
-        ],
         "500": [
           {
             "group": "500",
@@ -569,9 +555,33 @@
             "field": "InternalServerError",
             "description": "<p>Something went wrong getting the user info.</p>"
           }
+        ],
+        "4xx": [
+          {
+            "group": "4xx",
+            "optional": false,
+            "field": "BadRequest:",
+            "description": "<p>Either the request is missing the habit_name property or a habit already exists with that category</p>"
+          },
+          {
+            "group": "4xx",
+            "optional": false,
+            "field": "Unauthorized:",
+            "description": "<p>You don't have authorization for this request</p>"
+          }
         ]
       },
       "examples": [
+        {
+          "title": "400 Bad Request:",
+          "content": "400 Bad Request\n{\n  \"errorMessage\": \"Please include a habit_name for the habit you would like to add\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "400 BadRequest:",
+          "content": "400 Bad Request\n{\n  \"errorMessage\": \"There is already a habit with that category\"\n}",
+          "type": "json"
+        },
         {
           "title": "401 Unauthorized:",
           "content": "401 Unauthorized\n{\n  \"errorMessage\": \"Unauthorized: You don't have authorization for this request\"\n}",

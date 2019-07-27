@@ -167,18 +167,19 @@ module.exports = router;
  *        },
  *      ]
  *
- * @apiError (4xx) BadRequest: Please include a habit_name for the habit you would like to add
- * @apiErrorExample 401 Bad Request:
+ * @apiError (4xx) BadRequest: Either the request is missing the habit_name property or a habit already exists with that category
+ * @apiErrorExample 400 Bad Request:
  *     400 Bad Request
  *     {
  *       "errorMessage": "Please include a habit_name for the habit you would like to add"
  *     }
- * @apiError (4xx) BadRequest: You don't have authorization for this request
- * @apiErrorExample 401 BadRequest:
+ *
+ * @apiErrorExample 400 BadRequest:
  *     400 Bad Request
  *     {
  *       "errorMessage": "There is already a habit with that category"
  *     }
+ * 
  * @apiError (4xx) Unauthorized: You don't have authorization for this request
  * @apiErrorExample 401 Unauthorized:
  *     401 Unauthorized
