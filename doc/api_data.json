@@ -158,6 +158,68 @@
   },
   {
     "type": "get",
+    "url": "/api/my-habits",
+    "title": "Get User Habits",
+    "name": "GetUserHabits",
+    "group": "UserHabits",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Array",
+            "optional": false,
+            "field": "Array",
+            "description": "<p>of objects, each object has habit_name property, category_name and id</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    200 OK\n[\n   {\n      \"id\": 1,\n      \"habit_name\": \"Carry the ring to mordor\",\n       \"category_name\": \"Fitness\"\n    },\n     {\n      \"id\": 2,\n      \"habit_name\": \"Don't put on the ring\",\n       \"category_name\": \"Spirituality\"\n    },\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "401": [
+          {
+            "group": "401",
+            "optional": false,
+            "field": "Unauthorized:",
+            "description": "<p>You don't have authorization for this request</p>"
+          }
+        ],
+        "500": [
+          {
+            "group": "500",
+            "optional": false,
+            "field": "InternalServerError",
+            "description": "<p>Something went wrong getting the user info.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "401 Unauthorized:",
+          "content": "401 Unauthorized\n{\n  \"errorMessage\": \"Unauthorized: You don't have authorization for this request\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "500 Internal Server Error:",
+          "content": "500 Internal Server Error\n{\n  \"errorMessage\": \"SSomething went wrong getting your habit info\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./api/userHabits/userHabitsRouter.js",
+    "groupTitle": "UserHabits"
+  },
+  {
+    "type": "get",
     "url": "/api/me",
     "title": "Get User Info",
     "name": "GetBasicUserInfo",
