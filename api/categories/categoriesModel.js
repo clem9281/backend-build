@@ -26,6 +26,6 @@ function addCategory(newCategory) {
 function findUserCategoriesBy(filter) {
   return db("userHabits")
     .join("categories", "categories.id", "userHabits.category_id")
-    .distinct("category_name")
+    .distinct("categories.id", "category_name")
     .where(filter);
 }

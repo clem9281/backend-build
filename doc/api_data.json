@@ -28,6 +28,567 @@
     "name": ""
   },
   {
+    "type": "get",
+    "url": "/api/habits",
+    "title": "Get All Categories",
+    "name": "GetCategories",
+    "group": "Categories",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Token from login</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Auth-Example:",
+          "content": "{ \"authorization\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle\" }",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Array",
+            "optional": false,
+            "field": "CategoryArray",
+            "description": "<p>Array of category objects, each object has category_name property and id</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    200 OK\n[\n   {\n      \"id\": 1,\n      \"category_name\": \"Education\",\n    },\n     {\n      \"id\": 2,\n      \"habit_name\": \"Don't put on the ring\",\n    },\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "401": [
+          {
+            "group": "401",
+            "optional": false,
+            "field": "Unauthorized:",
+            "description": "<p>You don't have authorization for this request</p>"
+          }
+        ],
+        "500": [
+          {
+            "group": "500",
+            "optional": false,
+            "field": "InternalServerError",
+            "description": "<p>Something went wrong getting the list of categories.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "401 Unauthorized:",
+          "content": "401 Unauthorized\n{\n  \"errorMessage\": \"Unauthorized: You don't have authorization for this request\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "500 Internal Server Error:",
+          "content": "500 Internal Server Error\n{\n  \"errorMessage\": \"Something went wrong getting the list of habits\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./api/categories/categoriesRouter.js",
+    "groupTitle": "Categories"
+  },
+  {
+    "type": "get",
+    "url": "/api/categories/user",
+    "title": "Get User Categories",
+    "name": "GetUserCategories",
+    "group": "Categories",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Token from login</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Auth-Example:",
+          "content": "{ \"authorization\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle\" }",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Array",
+            "optional": false,
+            "field": "CategoryArray",
+            "description": "<p>Array of category objects that belongs to the use, each object has category_name and id</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    200 OK\n[\n   {\n      \"id\": 1,\n      \"category_name\": \"Fitness\"\n    },\n     {\n      \"id\": 2,\n      \"category_name\": \"Spirituality\"\n    },\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "401": [
+          {
+            "group": "401",
+            "optional": false,
+            "field": "Unauthorized:",
+            "description": "<p>You don't have authorization for this request</p>"
+          }
+        ],
+        "500": [
+          {
+            "group": "500",
+            "optional": false,
+            "field": "InternalServerError",
+            "description": "<p>Something went wrong getting the categories for that user.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "401 Unauthorized:",
+          "content": "401 Unauthorized\n{\n  \"errorMessage\": \"Unauthorized: You don't have authorization for this request\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "500 Internal Server Error:",
+          "content": "500 Internal Server Error\n{\n  \"errorMessage\": \"Something went wrong getting the categories for that user\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./api/categories/categoriesRouter.js",
+    "groupTitle": "Categories"
+  },
+  {
+    "type": "post",
+    "url": "/api/categories",
+    "title": "Post New Category",
+    "name": "PostCategory",
+    "group": "Categories",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "json",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Token from login</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Auth-Example:",
+          "content": "{ \"authorization\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle\" }",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Body": [
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "category_name",
+            "description": "<p>The name of the category you want to add</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Body-Example:",
+          "content": "{\n  \"category_name\": \"Fitness\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Array",
+            "optional": false,
+            "field": "CategoryArray",
+            "description": "<p>Array of category objects, including the new category, each object has category_name property and id</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "201 OK\n[\n   {\n     \"id\": 1,\n     \"category_name\": \"Fitness\"\n   },\n   {\n     \"id\": 2,\n     \"category_name\": \"Spirituality\"\n   },\n ]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "500": [
+          {
+            "group": "500",
+            "optional": false,
+            "field": "InternalServerError",
+            "description": "<p>Something went wrong getting the user info.</p>"
+          }
+        ],
+        "4xx": [
+          {
+            "group": "4xx",
+            "optional": false,
+            "field": "BadRequest:",
+            "description": "<p>Please include the category_name of the category you want to add</p>"
+          },
+          {
+            "group": "4xx",
+            "optional": false,
+            "field": "Bad",
+            "description": "<p>Request: Bad request: that category already exists and cannot be added</p>"
+          },
+          {
+            "group": "4xx",
+            "optional": false,
+            "field": "Unauthorized:",
+            "description": "<p>You don't have authorization for this request</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "400 Bad Request:",
+          "content": "400 Bad Request\n{\n  \"errorMessage\": \"Bad Request: Please include the category_name of the category you want to add.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "400 Bad Request:",
+          "content": "400 Bad Request\n{\n  \"errorMessage\": \"Bad request: that category already exists and cannot be added\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "401 Unauthorized:",
+          "content": "401 Unauthorized\n{\n  \"errorMessage\": \"Unauthorized: You don't have authorization for this request\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "500 Internal Server Error:",
+          "content": "500 Internal Server Error\n{\n  \"errorMessage\": \"Something went wrong when adding the habit\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./api/categories/categoriesRouter.js",
+    "groupTitle": "Categories"
+  },
+  {
+    "type": "get",
+    "url": "/api/habits",
+    "title": "Get All Habits",
+    "name": "GetHabits",
+    "group": "Habits",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Token from login</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Auth-Example:",
+          "content": "{ \"authorization\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle\" }",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Array",
+            "optional": false,
+            "field": "HabitArray",
+            "description": "<p>Array of habit objects, each object has habit_name property and id</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    200 OK\n[\n   {\n      \"id\": 1,\n      \"habit_name\": \"Carry the ring to mordor\",\n    },\n     {\n      \"id\": 2,\n      \"habit_name\": \"Don't put on the ring\",\n    },\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "401": [
+          {
+            "group": "401",
+            "optional": false,
+            "field": "Unauthorized:",
+            "description": "<p>You don't have authorization for this request</p>"
+          }
+        ],
+        "500": [
+          {
+            "group": "500",
+            "optional": false,
+            "field": "InternalServerError",
+            "description": "<p>Something went wrong getting the user info.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "401 Unauthorized:",
+          "content": "401 Unauthorized\n{\n  \"errorMessage\": \"Unauthorized: You don't have authorization for this request\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "500 Internal Server Error:",
+          "content": "500 Internal Server Error\n{\n  \"errorMessage\": \"Something went wrong getting the list of habits\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./api/habits/habitRouter.js",
+    "groupTitle": "Habits"
+  },
+  {
+    "type": "get",
+    "url": "/api/habits/user",
+    "title": "Get User Habits",
+    "name": "GetUserHabits",
+    "group": "Habits",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Token from login</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Auth-Example:",
+          "content": "{ \"authorization\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle\" }",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Array",
+            "optional": false,
+            "field": "HabitArray",
+            "description": "<p>Array of habit objects, each object has habit_name property, category_name and id</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    200 OK\n[\n   {\n      \"id\": 1,\n      \"habit_name\": \"Carry the ring to mordor\",\n       \"category_name\": \"Fitness\"\n    },\n     {\n      \"id\": 2,\n      \"habit_name\": \"Don't put on the ring\",\n       \"category_name\": \"Spirituality\"\n    },\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "401": [
+          {
+            "group": "401",
+            "optional": false,
+            "field": "Unauthorized:",
+            "description": "<p>You don't have authorization for this request</p>"
+          }
+        ],
+        "500": [
+          {
+            "group": "500",
+            "optional": false,
+            "field": "InternalServerError",
+            "description": "<p>Something went wrong getting the user info.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "401 Unauthorized:",
+          "content": "401 Unauthorized\n{\n  \"errorMessage\": \"Unauthorized: You don't have authorization for this request\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "500 Internal Server Error:",
+          "content": "500 Internal Server Error\n{\n  \"errorMessage\": \"Something went wrong getting your habit info\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./api/habits/habitRouter.js",
+    "groupTitle": "Habits"
+  },
+  {
+    "type": "post",
+    "url": "/api/habits/user",
+    "title": "Post New Habit To User",
+    "name": "PostUserHabits",
+    "group": "Habits",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "json",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Token from login</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Auth-Example:",
+          "content": "{ \"authorization\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle\" }",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Body": [
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "habit_name",
+            "description": "<p>The name of the habit you want to add</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "category_name",
+            "description": "<p>The category of the habit you want to add</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Body-Example:",
+          "content": "{\n  \"habit_name\": \"Walk into mordor\",\n  \"category_name\": \"Fitness\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Array",
+            "optional": false,
+            "field": "HabitArray",
+            "description": "<p>Array of habit objects, including the new habit, each object has habit_name property, category_name and id</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "201 OK\n[\n   {\n     \"id\": 1,\n     \"habit_name\": \"Walk into mordor\",\n     \"category_name\": \"Fitness\"\n   },\n   {\n     \"id\": 2,\n     \"habit_name\": \"Don't put on the ring\",\n     \"category_name\": \"Spirituality\"\n   },\n ]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "401": [
+          {
+            "group": "401",
+            "optional": false,
+            "field": "Unauthorized:",
+            "description": "<p>You don't have authorization for this request</p>"
+          }
+        ],
+        "500": [
+          {
+            "group": "500",
+            "optional": false,
+            "field": "InternalServerError",
+            "description": "<p>Something went wrong getting the user info.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "401 Unauthorized:",
+          "content": "401 Unauthorized\n{\n  \"errorMessage\": \"Unauthorized: You don't have authorization for this request\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "500 Internal Server Error:",
+          "content": "500 Internal Server Error\n{\n  \"errorMessage\": \"Something went wrong when adding the habit\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./api/habits/habitRouter.js",
+    "groupTitle": "Habits"
+  },
+  {
     "type": "post",
     "url": "/api/login",
     "title": "Login User",
@@ -166,197 +727,6 @@
     "version": "0.0.0",
     "filename": "./api/usersAuth/userRouter.js",
     "groupTitle": "UserAuth"
-  },
-  {
-    "type": "get",
-    "url": "/api/user-habits",
-    "title": "Get User Habits",
-    "name": "GetUserHabits",
-    "group": "UserHabits",
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "authorization",
-            "description": "<p>Token from login</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Auth-Example:",
-          "content": "{ \"authorization\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle\" }",
-          "type": "json"
-        }
-      ]
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "Array",
-            "optional": false,
-            "field": "HabitArray",
-            "description": "<p>Array of habit objects, each object has habit_name property, category_name and id</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "    200 OK\n[\n   {\n      \"id\": 1,\n      \"habit_name\": \"Carry the ring to mordor\",\n       \"category_name\": \"Fitness\"\n    },\n     {\n      \"id\": 2,\n      \"habit_name\": \"Don't put on the ring\",\n       \"category_name\": \"Spirituality\"\n    },\n]",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "fields": {
-        "401": [
-          {
-            "group": "401",
-            "optional": false,
-            "field": "Unauthorized:",
-            "description": "<p>You don't have authorization for this request</p>"
-          }
-        ],
-        "500": [
-          {
-            "group": "500",
-            "optional": false,
-            "field": "InternalServerError",
-            "description": "<p>Something went wrong getting the user info.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "401 Unauthorized:",
-          "content": "401 Unauthorized\n{\n  \"errorMessage\": \"Unauthorized: You don't have authorization for this request\"\n}",
-          "type": "json"
-        },
-        {
-          "title": "500 Internal Server Error:",
-          "content": "500 Internal Server Error\n{\n  \"errorMessage\": \"Something went wrong getting your habit info\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "./api/userHabits/userHabitsRouter.js",
-    "groupTitle": "UserHabits"
-  },
-  {
-    "type": "post",
-    "url": "/api/user-habits",
-    "title": "Post New Habit To User",
-    "name": "PostUserHabits",
-    "group": "UserHabits",
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "json",
-            "optional": false,
-            "field": "authorization",
-            "description": "<p>Token from login</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Auth-Example:",
-          "content": "{ \"authorization\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle\" }",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Body": [
-          {
-            "group": "Body",
-            "type": "String",
-            "optional": false,
-            "field": "habit_name",
-            "description": "<p>The name of the habit you want to add</p>"
-          },
-          {
-            "group": "Body",
-            "type": "String",
-            "optional": false,
-            "field": "category_name",
-            "description": "<p>The category of the habit you want to add</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Request-Body-Example:",
-          "content": "{\n  \"habit_name\": \"Walk into mordor\",\n  \"category_name\": \"Fitness\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "Array",
-            "optional": false,
-            "field": "HabitArray",
-            "description": "<p>Array of habit objects, including the new habit, each object has habit_name property, category_name and id</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "201 OK\n[\n   {\n     \"id\": 1,\n     \"habit_name\": \"Walk into mordor\",\n     \"category_name\": \"Fitness\"\n   },\n   {\n     \"id\": 2,\n     \"habit_name\": \"Don't put on the ring\",\n     \"category_name\": \"Spirituality\"\n   },\n ]",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "fields": {
-        "401": [
-          {
-            "group": "401",
-            "optional": false,
-            "field": "Unauthorized:",
-            "description": "<p>You don't have authorization for this request</p>"
-          }
-        ],
-        "500": [
-          {
-            "group": "500",
-            "optional": false,
-            "field": "InternalServerError",
-            "description": "<p>Something went wrong getting the user info.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "401 Unauthorized:",
-          "content": "401 Unauthorized\n{\n  \"errorMessage\": \"Unauthorized: You don't have authorization for this request\"\n}",
-          "type": "json"
-        },
-        {
-          "title": "500 Internal Server Error:",
-          "content": "500 Internal Server Error\n{\n  \"errorMessage\": \"Something went wrong when adding the habit\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "./api/userHabits/userHabitsRouter.js",
-    "groupTitle": "UserHabits"
   },
   {
     "type": "get",
