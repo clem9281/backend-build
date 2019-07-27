@@ -1,6 +1,10 @@
 const express = require("express");
 const habitDb = require("./habitModel");
-const { habitBody, userHabitBody } = require("../middelware");
+const {
+  habitBody,
+  userHabitBody,
+  userHabitAndCategoryUnique
+} = require("../middelware");
 
 // DOCUMENTATION AT BOTTOM
 
@@ -45,7 +49,7 @@ router
         .json({ errorMessage: "Something went wrong getting your habit info" });
     }
   })
-  .post(userHabitBody, async (req, res) => {
+  .post(userHabitBody, userHabitAndCategoryUnique, async (req, res) => {
     const user_id = req.userId;
     const newHabitInfo = req.body;
     try {
@@ -163,7 +167,19 @@ module.exports = router;
  *        },
  *      ]
  *
- * @apiError (401) Unauthorized: You don't have authorization for this request
+ * @apiError (4xx) BadRequest: Please include a habit_name for the habit you would like to add
+ * @apiErrorExample 401 Bad Request:
+ *     400 Bad Request
+ *     {
+ *       "errorMessage": "Please include a habit_name for the habit you would like to add"
+ *     }
+ * @apiError (4xx) BadRequest: You don't have authorization for this request
+ * @apiErrorExample 401 BadRequest:
+ *     400 Bad Request
+ *     {
+ *       "errorMessage": "There is already a habit with that category"
+ *     }
+ * @apiError (4xx) Unauthorized: You don't have authorization for this request
  * @apiErrorExample 401 Unauthorized:
  *     401 Unauthorized
  *     {

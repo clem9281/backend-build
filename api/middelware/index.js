@@ -6,5 +6,6 @@ module.exports = {
   userHabitBody: require("./validation/requestBodyValidation/userHabitBody"),
   categoryBody: require("./validation/requestBodyValidation/categoryBody"),
   habitBody: require("./validation/requestBodyValidation/habitBody"),
-  categoryUnique: require("./validation/uniquenessValidation/categoryUnique")
+  categoryUnique: require("./validation/uniquenessValidation/categoryUnique"),
+  userHabitAndCategoryUnique: require("./validation/uniquenessValidation/userHabitAndCategoryUnique")
 };
