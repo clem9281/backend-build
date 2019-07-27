@@ -69,10 +69,11 @@ module.exports = router;
  * @apiName RegisterUser
  * @apiGroup UserAuth
  *
- * @apiSuccess {Object} UserObject Object with user name and username
+ * @apiSuccess {Object} UserObject Object with user id, name and username
  * @apiSuccessExample Success-Response:
  *     200 OK
  *     {
+ *        "io": 1,
  *       "name": "Frodo Baggins",
  *       "username": "FrodoRingBearer"
  *     }

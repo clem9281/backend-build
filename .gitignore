@@ -62,4 +62,5 @@ typings/
 
 
 # hide sqlite db
-.db3
+*.db3
+*.sqlite3

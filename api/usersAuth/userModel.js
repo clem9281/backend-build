@@ -15,15 +15,16 @@ function findBy(filter) {
 
 // return user object if exists, if not returns undefined
 function findInfoBy(filter) {
+  console.log(filter);
   return db("users")
-    .select("username", "name")
+    .select("id", "username", "name")
     .where(filter)
     .first();
 }
 
 // add the new user and return the newly created record
 function add(user) {
-  return db("usrs")
+  return db("users")
     .insert(user, "id")
     .then(([id]) => findInfoBy({ id }));
 }

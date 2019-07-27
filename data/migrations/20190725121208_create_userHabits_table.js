@@ -8,7 +8,7 @@ exports.up = function(knex) {
       .notNullable()
       .references("id")
       .inTable("habits")
-      .onDelete("CASCADE")
+      .onDelete("RESTRICT")
       .onUpdate("CASCADE");
     tbl
       .integer("user_id")
@@ -24,8 +24,9 @@ exports.up = function(knex) {
       .notNullable()
       .references("id")
       .inTable("categories")
-      .onDelete("CASCADE")
+      .onDelete("RESTRICT")
       .onUpdate("CASCADE");
+    tbl.unique(["habit_id", "user_id", "category_id"]);
   });
 };
 
