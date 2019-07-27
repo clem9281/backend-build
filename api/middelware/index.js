@@ -1,9 +1,9 @@
 module.exports = {
-  validateSimpleUserInfoExists: require("./validation/requestBodyValidation/validateSimpleUserInfoExists"),
-  validateComplexUserInfoExists: require("./validation/requestBodyValidation/validateComplexUserInfoExists"),
-  validateUsernameUnique: require("./validation/uniquenessValidation/validateUsernameUnique"),
+  simpleUserInfoExists: require("./validation/requestBodyValidation/simpleUserInfoExists"),
+  complexUserInfoExists: require("./validation/requestBodyValidation/complexUserInfoExists"),
+  usernameUnique: require("./validation/uniquenessValidation/usernameUnique"),
   restricted: require("./auth/restricted"),
-  validateUserHabitBody: require("./validation/requestBodyValidation/validateUserHabitBody"),
-  validateCategoryBody: require("./validation/requestBodyValidation/validateCategoryBody"),
-  validateHabitBody: require("./validation/requestBodyValidation/validateHabitBody")
+  userHabitBody: require("./validation/requestBodyValidation/userHabitBody"),
+  categoryBody: require("./validation/requestBodyValidation/categoryBody"),
+  habitBody: require("./validation/requestBodyValidation/habitBody")
 };

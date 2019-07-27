@@ -1,6 +1,6 @@
 const express = require("express");
 const categoriesDb = require("./categoriesModel");
-const { validateCategoryBody } = require("../middelware");
+const { categoryBody } = require("../middelware");
 
 // DOCUMENTATION AT BOTTOM
 
@@ -18,18 +18,16 @@ router
         .json({ errorMessage: "Something went wrong getting the categories" });
     }
   })
-  .post(validateCategoryBody, async (req, res) => {
+  .post(categoryBody, async (req, res) => {
     const user_id = req.userId;
     const newCategoryInfo = req.body;
     try {
       const categories = await categoriesDb.addCategory(newCategoryInfo);
       res.status(201).json(categories);
     } catch (error) {
-      res
-        .status(500)
-        .json({
-          errorMessage: "Something went wrong when adding the category"
-        });
+      res.status(500).json({
+        errorMessage: "Something went wrong when adding the category"
+      });
     }
   });
 

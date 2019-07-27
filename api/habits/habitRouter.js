@@ -1,6 +1,6 @@
 const express = require("express");
 const habitDb = require("./habitModel");
-const { validateHabitBody, validateUserHabitBody } = require("../middelware");
+const { habitBody, userHabitBody } = require("../middelware");
 
 // DOCUMENTATION AT BOTTOM
 
@@ -19,7 +19,7 @@ router
       });
     }
   })
-  .post(validateHabitBody, async (req, res) => {
+  .post(habitBody, async (req, res) => {
     const newHabitInfo = req.body;
     try {
       const habits = await habitDb.addHabit(newHabitInfo);
@@ -45,7 +45,7 @@ router
         .json({ errorMessage: "Something went wrong getting your habit info" });
     }
   })
-  .post(validateUserHabitBody, async (req, res) => {
+  .post(userHabitBody, async (req, res) => {
     const user_id = req.userId;
     const newHabitInfo = req.body;
     try {

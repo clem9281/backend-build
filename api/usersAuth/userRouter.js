@@ -6,17 +6,17 @@ const userDb = require("./userModel");
 // DOCUMENTATION AT BOTTOM
 
 const {
-  validateComplexUserInfoExists,
-  validateSimpleUserInfoExists,
-  validateUsernameUnique
+  complexUserInfoExists,
+  simpleUserInfoExists,
+  usernameUnique
 } = require("../middelware");
 
 const router = express.Router();
 
 router.post(
   "/register",
-  validateComplexUserInfoExists,
-  validateUsernameUnique,
+  complexUserInfoExists,
+  usernameUnique,
   async (req, res) => {
     const user = req.body;
     const hash = bcrypt.hashSync(user.password, 14);
@@ -34,7 +34,7 @@ router.post(
   }
 );
 
-router.post("/login", validateSimpleUserInfoExists, async (req, res) => {
+router.post("/login", simpleUserInfoExists, async (req, res) => {
   const { username, password } = req.body;
   try {
     const user = await userDb.findBy({ username });
