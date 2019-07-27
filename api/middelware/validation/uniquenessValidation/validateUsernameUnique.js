@@ -1,4 +1,4 @@
-const userDb = require("../../usersAuth/userModel");
+const userDb = require("../../../userInfo/userInfoModel");
 
 module.exports = async (req, res, next) => {
   const { username } = req.body;
