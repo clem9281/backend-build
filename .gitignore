@@ -59,3 +59,8 @@ typings/
 
 # next.js build output
 .next
+
+
+# hide sqlite db
+*.db3
+*.sqlite3
