@@ -21,10 +21,12 @@ router.get("/", async (req, res) => {
 module.exports = router;
 
 /**
- * @api {get} /api/me Get User Info
+ * @api {get} /api/user-info Get User Info
  * @apiName GetBasicUserInfo
  * @apiGroup UserInfo
- *
+ * @apiHeader {json} authorization Token from login
+ * @apiHeaderExample {json} Auth-Example:
+                 { "authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle" }
  * @apiSuccess {Object} UserObject Object with user id, username, name and email
  * @apiSuccessExample Success-Response:
  *     200 OK

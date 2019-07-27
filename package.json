@@ -6,7 +6,8 @@
   "scripts": {
     "test": "cross-env process.env.DB_ENV=testing jest --watch --verbose",
     "server": "nodemon index.js",
-    "start": "node index.js"
+    "start": "node index.js",
+    "apidoc": "apidoc -f backend-build/ '.*\\.js$' -e node_modules/"
   },
   "repository": {
     "type": "git",

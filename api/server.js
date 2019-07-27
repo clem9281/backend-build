@@ -18,7 +18,7 @@ server.use("/", express.static(apiDocsPath));
 
 // ROUTES
 server.use("/api", userRouter);
-server.use("/api/me", restricted, userInfoRouter);
-server.use("/api/myHabits", restricted, userHabitRouter);
+server.use("/api/user-info", restricted, userInfoRouter);
+server.use("/api/user-habits", restricted, userHabitRouter);
 
 module.exports = server;

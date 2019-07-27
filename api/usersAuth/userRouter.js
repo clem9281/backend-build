@@ -77,7 +77,7 @@ module.exports = router;
  * @apiSuccessExample Success-Response:
  *     200 OK
  *     {
- *        "io": 1,
+ *       "id": 1,
  *       "name": "Frodo Baggins",
  *       "username": "FrodoRingBearer"
  *     }
@@ -113,20 +113,20 @@ module.exports = router;
  * @apiSuccessExample Success-Response:
  *     200 OK
  *     {
- *        message: `Welcome ${username}, you are logged in`,
+ *        "message": "Welcome username, you are logged in",
  *       "token": "cCI6IkpXVCJ9.eyJzdWJqZWN0IjozLCJ1c2VybmFtZSI6Im5hbWUxIiwiaWF0IjoxNTY0MDc3Njc3LCJleHAiOjE1NjQxNjQwNz"
  *     }
  *
- * @apiError (400) BadRequest Required information was not supplied to request body
+ * @apiError (4xx) BadRequest Required information was not supplied to request body
  *
  * @apiErrorExample 400 Bad Request:
  *     400 Bad Request
  *     {
  *       "errorMessage": "Bad request: please include a username and password"
  *     }
- *@apiError (401) Unauthorized That username or password is not correct.
+ *@apiError (4xx) Unauthorized That username or password is not correct.
  *
- * @apiErrorExample 400 Bad Request:
+ * @apiErrorExample 401 Unauthorized:
  *     401 Unauthorized
  *     {
  *       "errorMessage": "That username or password is not correct."

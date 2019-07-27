@@ -8,7 +8,6 @@ module.exports = (req, res, next) => {
           "Unauthorized: You don't have authorization for this request"
       });
     } else {
-      console.log(decoded);
       req.userId = decoded.subject;
       next();
     }
