@@ -10,6 +10,6 @@ function findHabitsBy(filter) {
 
 function add(habit) {
   return db("habits")
-    .insert(habit)
+    .insert(habit, "id")
     .then(([id]) => findHabitsBy({ id }));
 }

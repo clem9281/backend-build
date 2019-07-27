@@ -3,5 +3,6 @@ module.exports = {
   validateComplexUserInfoExists: require("./auth/validateComplexUserInfoExists"),
   validateUsernameUnique: require("./auth/validateUsernameUnique"),
   restricted: require("./auth/restricted"),
-  validateUserHabitBody: require("./userHabits/validateUserHabitBody")
+  validateUserHabitBody: require("./userHabits/validateUserHabitBody"),
+  validateCategoryBody: require("./categories/validateCategoryBody")
 };
