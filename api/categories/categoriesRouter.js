@@ -46,7 +46,7 @@ router.route("/user").get(async (req, res) => {
 module.exports = router;
 
 /**
- * @api {get} /api/habits Get All Categories
+ * @api {get} /api/caetgories Get All Categories
  * @apiName GetCategories
  * @apiGroup Categories
  * @apiHeader {String} authorization Token from login
@@ -77,7 +77,7 @@ module.exports = router;
  * @apiErrorExample 500 Internal Server Error:
  *     500 Internal Server Error
  *     {
- *       "errorMessage": "Something went wrong getting the list of habits"
+ *       "errorMessage": "Something went wrong getting the list of categories"
  *     }
  */
 
@@ -162,10 +162,10 @@ module.exports = router;
  *       "errorMessage": "Unauthorized: You don't have authorization for this request"
  *     }
  *
- * @apiError (500) InternalServerError Something went wrong getting the user info.
+ * @apiError (500) InternalServerError Something went wrong adding the category.
  * @apiErrorExample 500 Internal Server Error:
  *     500 Internal Server Error
  *     {
- *       "errorMessage": "Something went wrong when adding the habit"
+ *       "errorMessage": "Something went wrong when adding the category"
  *     }
  */

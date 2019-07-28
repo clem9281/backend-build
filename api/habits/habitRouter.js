@@ -91,7 +91,7 @@ module.exports = router;
  *       "errorMessage": "Unauthorized: You don't have authorization for this request"
  *     }
  *
- * @apiError (500) InternalServerError Something went wrong getting the user info.
+ * @apiError (500) InternalServerError Something went wrong getting the habits.
  * @apiErrorExample 500 Internal Server Error:
  *     500 Internal Server Error
  *     {
@@ -129,7 +129,7 @@ module.exports = router;
  *       "errorMessage": "Unauthorized: You don't have authorization for this request"
  *     }
  *
- * @apiError (500) InternalServerError Something went wrong getting the user info.
+ * @apiError (500) InternalServerError Something went wrong getting your habit info.
  * @apiErrorExample 500 Internal Server Error:
  *     500 Internal Server Error
  *     {
@@ -187,7 +187,7 @@ module.exports = router;
  *       "errorMessage": "Unauthorized: You don't have authorization for this request"
  *     }
  *
- * @apiError (500) InternalServerError Something went wrong getting the user info.
+ * @apiError (500) InternalServerError Something went wrong adding the habit.
  * @apiErrorExample 500 Internal Server Error:
  *     500 Internal Server Error
  *     {

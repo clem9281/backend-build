@@ -28,36 +28,8 @@ define({ "api": [
     "name": ""
   },
   {
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "optional": false,
-            "field": "varname1",
-            "description": "<p>No type.</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "varname2",
-            "description": "<p>With type.</p>"
-          }
-        ]
-      }
-    },
-    "type": "",
-    "url": "",
-    "version": "0.0.0",
-    "filename": "./doc/main.js",
-    "group": "C__Users_clem9_Documents_Projects_backend_build_doc_main_js",
-    "groupTitle": "C__Users_clem9_Documents_Projects_backend_build_doc_main_js",
-    "name": ""
-  },
-  {
     "type": "get",
-    "url": "/api/habits",
+    "url": "/api/caetgories",
     "title": "Get All Categories",
     "name": "GetCategories",
     "group": "Categories",
@@ -128,7 +100,7 @@ define({ "api": [
         },
         {
           "title": "500 Internal Server Error:",
-          "content": "500 Internal Server Error\n{\n  \"errorMessage\": \"Something went wrong getting the list of habits\"\n}",
+          "content": "500 Internal Server Error\n{\n  \"errorMessage\": \"Something went wrong getting the list of categories\"\n}",
           "type": "json"
         }
       ]
@@ -292,7 +264,7 @@ define({ "api": [
             "group": "500",
             "optional": false,
             "field": "InternalServerError",
-            "description": "<p>Something went wrong getting the user info.</p>"
+            "description": "<p>Something went wrong adding the category.</p>"
           }
         ],
         "4xx": [
@@ -328,7 +300,7 @@ define({ "api": [
         },
         {
           "title": "500 Internal Server Error:",
-          "content": "500 Internal Server Error\n{\n  \"errorMessage\": \"Something went wrong when adding the habit\"\n}",
+          "content": "500 Internal Server Error\n{\n  \"errorMessage\": \"Something went wrong when adding the category\"\n}",
           "type": "json"
         }
       ]
@@ -410,7 +382,7 @@ define({ "api": [
             "group": "500",
             "optional": false,
             "field": "InternalServerError",
-            "description": "<p>Something went wrong getting the user info.</p>"
+            "description": "<p>Something went wrong marking that habit as incomplete.</p>"
           }
         ],
         "4xx": [
@@ -516,7 +488,7 @@ define({ "api": [
             "group": "500",
             "optional": false,
             "field": "InternalServerError",
-            "description": "<p>Something went wrong getting the list of categories.</p>"
+            "description": "<p>Something went wrong getting the list of habits.</p>"
           }
         ]
       },
@@ -610,7 +582,7 @@ define({ "api": [
             "group": "500",
             "optional": false,
             "field": "InternalServerError",
-            "description": "<p>Something went wrong getting the user info.</p>"
+            "description": "<p>Something went wrong marking that habit as completed.</p>"
           }
         ],
         "4xx": [
@@ -716,7 +688,7 @@ define({ "api": [
             "group": "500",
             "optional": false,
             "field": "InternalServerError",
-            "description": "<p>Something went wrong getting the user info.</p>"
+            "description": "<p>Something went wrong getting the habits.</p>"
           }
         ]
       },
@@ -798,7 +770,7 @@ define({ "api": [
             "group": "500",
             "optional": false,
             "field": "InternalServerError",
-            "description": "<p>Something went wrong getting the user info.</p>"
+            "description": "<p>Something went wrong getting your habit info.</p>"
           }
         ]
       },
@@ -899,7 +871,7 @@ define({ "api": [
             "group": "500",
             "optional": false,
             "field": "InternalServerError",
-            "description": "<p>Something went wrong getting the user info.</p>"
+            "description": "<p>Something went wrong adding the habit.</p>"
           }
         ],
         "4xx": [
@@ -946,7 +918,7 @@ define({ "api": [
   },
   {
     "type": "post",
-    "url": "/api/login",
+    "url": "/api/auth/login",
     "title": "Login User",
     "name": "LoginUser",
     "group": "UserAuth",
@@ -977,7 +949,7 @@ define({ "api": [
             "group": "500",
             "optional": false,
             "field": "InternalServerError",
-            "description": "<p>Something went wrong when registering the user.</p>"
+            "description": "<p>Something went wrong when logging in the user.</p>"
           }
         ],
         "4xx": [
@@ -1019,7 +991,7 @@ define({ "api": [
   },
   {
     "type": "post",
-    "url": "/api/register",
+    "url": "/api/auth/register",
     "title": "Create New User",
     "name": "RegisterUser",
     "group": "UserAuth",
@@ -1086,10 +1058,157 @@ define({ "api": [
   },
   {
     "type": "post",
-    "url": "/api/unique-username",
+    "url": "/api/auth/unique-email",
+    "title": "Check if Email is Available",
+    "name": "uniqueemail",
+    "group": "UserAuth",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "json",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Token from login</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Auth-Example:",
+          "content": "{ \"authorization\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle\" }",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Body": [
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>The email of the user you want to check</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Body-Example:",
+          "content": "{\n  \"email\": \"that_wizard@the_fellowship.com\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "MessageObject",
+            "description": "<p>Object with message</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "200 OK\n{\n  \"message\": \"We don't have an account with that email!\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "500": [
+          {
+            "group": "500",
+            "optional": false,
+            "field": "InternalServerError",
+            "description": "<p>Something went wrong when validating the user.</p>"
+          }
+        ],
+        "4xx": [
+          {
+            "group": "4xx",
+            "optional": false,
+            "field": "BadRequest",
+            "description": "<p>Email already exists or required information was not supplied to request body</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "400 Bad Request:",
+          "content": "400 Bad Request\n{\n  \"errorMessage\": \"We already have an account with that email address\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "400 Bad Request:",
+          "content": "400 Bad Request\n{\n  \"errorMessage\": \"Bad request: please include an email\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "500 Internal Server Error:",
+          "content": "500 Internal Server Error\n{\n  \"errorMessage\": \"Something went wrong validating that email, please try again\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./api/usersAuth/userRouter.js",
+    "groupTitle": "UserAuth"
+  },
+  {
+    "type": "post",
+    "url": "/api/auth/unique-username",
     "title": "Check if Username is Available",
     "name": "uniqueusername",
     "group": "UserAuth",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "json",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Token from login</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Auth-Example:",
+          "content": "{ \"authorization\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle\" }",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Body": [
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "username",
+            "description": "<p>The username of the user you want to check</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Body-Example:",
+          "content": "{\n  \"username\": \"the_grey\"\n}",
+          "type": "json"
+        }
+      ]
+    },
     "success": {
       "fields": {
         "Success 200": [
@@ -1112,20 +1231,20 @@ define({ "api": [
     },
     "error": {
       "fields": {
-        "400": [
-          {
-            "group": "400",
-            "optional": false,
-            "field": "BadRequest",
-            "description": "<p>Username already exists or required information was not supplied to request body</p>"
-          }
-        ],
         "500": [
           {
             "group": "500",
             "optional": false,
             "field": "InternalServerError",
             "description": "<p>Something went wrong when registering the user.</p>"
+          }
+        ],
+        "4xx": [
+          {
+            "group": "4xx",
+            "optional": false,
+            "field": "BadRequest",
+            "description": "<p>Username already exists or required information was not supplied to request body</p>"
           }
         ]
       },
@@ -1137,7 +1256,7 @@ define({ "api": [
         },
         {
           "title": "400 Bad Request:",
-          "content": "400 Bad Request\n{\n  \"errorMessage\": \"Bad request: please include a username, password, name and email\"\n}",
+          "content": "400 Bad Request\n{\n  \"errorMessage\": \"\"Bad request: please include a username\"\"\n}",
           "type": "json"
         },
         {
@@ -1225,6 +1344,219 @@ define({ "api": [
         {
           "title": "500 Internal Server Error:",
           "content": "500 Internal Server Error\n{\n  \"errorMessage\": \"SSomething went wrong getting the user info\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./api/userInfo/userInfoRouter.js",
+    "groupTitle": "UserInfo"
+  },
+  {
+    "type": "delete",
+    "url": "/api/user-info",
+    "title": "Delete the User",
+    "name": "deleteUser",
+    "group": "UserInfo",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "json",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Token from login</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Auth-Example:",
+          "content": "{ \"authorization\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle\" }",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "MessageObject",
+            "description": "<p>Object with delete success message</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "200 OK\n{\n      \"message\": \"Your account has been successfully deleted\"\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "404": [
+          {
+            "group": "404",
+            "optional": false,
+            "field": "NotFound",
+            "description": "<p>If the user is not found we cannot delete them. It's unlikely we will hit this error, since we are using the token to find the user, but I included it for clarity.</p>"
+          }
+        ],
+        "500": [
+          {
+            "group": "500",
+            "optional": false,
+            "field": "InternalServerError",
+            "description": "<p>Something went wrong when deleting the user.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "404 Not Found:",
+          "content": "404 Not Found\n{\n  \"errorMessage\": \"Something went wrong, that user doesn't exist!\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "500 Internal Server Error:",
+          "content": "500 Internal Server Error\n{\n  \"errorMessage\": \"Something went wrong when deleting the user\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./api/userInfo/userInfoRouter.js",
+    "groupTitle": "UserInfo"
+  },
+  {
+    "type": "put",
+    "url": "/api/user-info",
+    "title": "Update the User Info",
+    "name": "updateUserInfo",
+    "group": "UserInfo",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "json",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Token from login</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Auth-Example:",
+          "content": "{ \"authorization\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle\" }",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Body": [
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "username",
+            "description": "<p>The username of the user you want to update</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>The email of the user you want to update</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>The name of the user you want to update</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Body-Example:",
+          "content": "{\n   \"username\": \"the_wizard_of_many_colors\",\n      \"name\": \"Gandalf\",\n      \"email\": \"that_wizard@the_fellowship.com\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "UserObject",
+            "description": "<p>Object with user properties: name email id and username</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "200 OK\n{\n      \"id\": 2,\n      \"username\": \"the_wizard_of_many_colors\",\n      \"name\": \"Gandalf\",\n      \"email\": \"that_wizard@the_fellowship.com\"\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "500": [
+          {
+            "group": "500",
+            "optional": false,
+            "field": "InternalServerError",
+            "description": "<p>Something went wrong when updating the user.</p>"
+          }
+        ],
+        "4xx": [
+          {
+            "group": "4xx",
+            "optional": false,
+            "field": "BadRequest",
+            "description": "<p>Username or email already exists or required information was not supplied to request body. It's highly unlikely we will hit the 404 error on this endpoint, as we are finding the user based on the token, but I included it for clarity</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "400 Bad Request:",
+          "content": "400 Bad Request\n{\n  \"errorMessage\": \"Username already exists\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "400 Bad Request:",
+          "content": "400 Bad Request\n{\n  \"errorMessage\": \"We already have an account with that email address\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "400 Bad Request:",
+          "content": "400 Bad Request\n{\n  \"errorMessage\": \"Bad request: please include a username, name and email\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "404 Not Found:",
+          "content": "404 Not Found\n{\n  \"errorMessage\": \"Something went wrong, that user doesn't exist!\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "500 Internal Server Error:",
+          "content": "500 Internal Server Error\n{\n  \"errorMessage\": \"Something went wrong updating the user info\"\n}",
           "type": "json"
         }
       ]

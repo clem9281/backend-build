@@ -49,10 +49,13 @@ async function addCompleted(habitId, userId) {
       habit_id: habitId
     })
     .first();
-  const [id] = await db("userCompleted").insert({
-    userHabit_id: userHabit.id,
-    completed_date: moment().format("YYYY-M-D")
-  });
+  const [id] = await db("userCompleted").insert(
+    {
+      userHabit_id: userHabit.id,
+      completed_date: moment().format("YYYY-M-D")
+    },
+    "id"
+  );
   return getList(userId);
 }
 
