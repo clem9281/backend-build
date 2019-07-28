@@ -1,6 +1,8 @@
 const express = require("express");
-const userInfoDb = require("./userInfoModel");
+const bcrypt = require("bcryptjs");
 
+const userInfoDb = require("./userInfoModel");
+const userAuthDb = require("../usersAuth/userModel");
 // DOCUMENTATION AT BOTTOM
 const {
   simpleUserInfoExists,
@@ -39,11 +41,9 @@ router
           res.status(200).json(updated);
         }
       } catch (error) {
-        res
-          .status(500)
-          .json({
-            errorMessage: "Something went wrong updating the user info"
-          });
+        res.status(500).json({
+          errorMessage: "Something went wrong updating the user info"
+        });
       }
     }
   )
@@ -67,6 +67,37 @@ router
         .json({ errorMessage: "Something went wrong getting the user info" });
     }
   });
+
+router.route("/password").put(async (req, res) => {
+  const id = req.userId;
+  const { password, new_password } = req.body;
+  if (!password || !new_password) {
+    res.status(400).json({
+      errorMessage:
+        "Bad request: please send your old password and what you would like to change it to."
+    });
+  } else {
+    try {
+      const userInfo = await userAuthDb.findBy({ id });
+      if (userInfo && bcrypt.compareSync(password, userInfo.password)) {
+        const updatedUser = await userInfoDb.updateUser(
+          { password: new_password },
+          id
+        );
+        res.status(200).json(updatedUser);
+      } else {
+        res.status(401).json({
+          errorMessage:
+            "We cannot authorize this request: either the password was wrong or the user does not exist"
+        });
+      }
+    } catch (error) {
+      res
+        .status(500)
+        .json({ errorMessage: "Something went wrong updating your password" });
+    }
+  }
+});
 module.exports = router;
 
 /**
@@ -188,5 +219,62 @@ module.exports = router;
  *     500 Internal Server Error
  *     {
  *       "errorMessage": "Something went wrong when deleting the user"
+ *     }
+ */
+
+/**
+ * @api {put} /api/user-info/password Update the User Password
+ * @apiName updateUserPassword
+ * @apiGroup UserInfo
+ *@apiHeader {json} authorization Token from login
+ * @apiHeaderExample {json} Auth-Example:
+                 { "authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle" }
+ @apiParam (Body) {String} password The user's current password
+ @apiParam (Body) {String} new_password The user's new password
+ * @apiParamExample {json} Request-Body-Example:
+ *     {
+          "password": "pass",
+	        "new_password": "pass1"
+        }
+ * @apiSuccess {Object} UserObject Object with user properties: name email id and username
+ * @apiSuccessExample Success-Response:
+ *     200 OK
+ *     {
+          "id": 2,
+          "username": "the_wizard_of_many_colors",
+          "name": "Gandalf",
+          "email": "that_wizard@the_fellowship.com"
+      }
+ *
+ * @apiError (4xx) BadRequest Either the user sent the wrong original password, or the user does not exist somehow. 
+ *
+ *@apiErrorExample 400 Bad Request:
+ *     400 Bad Request
+ *     {
+ *       "errorMessage": "Bad request: please send your old password and what you would like to change it to."
+ *     }
+ * @apiErrorExample 401 Unauthorized:
+ *     401 Unauthorized
+ *     {
+ *       "errorMessage": "We already have an account with that email address"
+ *     }
+ *
+ * @apiErrorExample 400 Bad Request:
+ *     400 Bad Request
+ *     {
+ *       "errorMessage": "Bad request: please include a username, name and email"
+ *     }
+ * 
+ *  @apiErrorExample 404 Not Found:
+ *     404 Not Found
+ *     {
+ *       "errorMessage":  "We cannot authorize this request: either the password was wrong or the user does not exist"
+ *     }
+ *
+ * @apiError (500) InternalServerError Something went wrong when updating your password.
+ * @apiErrorExample 500 Internal Server Error:
+ *     500 Internal Server Error
+ *     {
+ *       "errorMessage": "Something went wrong updating your password"
  *     }
  */
