@@ -31,6 +31,6 @@ exports.seed = function(knex) {
       userHabit_id: 1,
       completed_date: moment("2019-07-21").format("YYYY-M-D")
     },
-    { userHabit_id: 1, completed_date: moment("2019-23-07").format("YYYY-M-D") }
+    { userHabit_id: 1, completed_date: moment("2019-07-23").format("YYYY-M-D") }
   ]);
 };
