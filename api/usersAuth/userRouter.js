@@ -13,6 +13,10 @@ const {
 
 const router = express.Router();
 
+router.post("/unique-username", usernameUnique, (req, res) => {
+  res.status(200).json({ message: "That username is available!" });
+});
+
 router.post(
   "/register",
   complexUserInfoExists,
@@ -67,6 +71,40 @@ function generateToken(user) {
   return jwt.sign(payload, secret, options);
 }
 module.exports = router;
+
+/**
+ * @api {post} /api/unique-username Check if Username is Available
+ * @apiName uniqueusername
+ * @apiGroup UserAuth
+ *
+ * @apiSuccess {Object} MessageObject Object with message
+ * @apiSuccessExample Success-Response:
+ *     200 OK
+ *     {
+ *       "message": "That username is available!"
+ *     }
+ *
+ * @apiError (400) BadRequest Username already exists or required information was not supplied to request body
+ *
+ * @apiErrorExample 400 Bad Request:
+ *     400 Bad Request
+ *     {
+ *       "errorMessage": "Username already exists"
+ *     }
+ *
+ * @apiErrorExample 400 Bad Request:
+ *     400 Bad Request
+ *     {
+ *       "errorMessage": "Bad request: please include a username, password, name and email"
+ *     }
+ *
+ * @apiError (500) InternalServerError Something went wrong when registering the user.
+ * @apiErrorExample 500 Internal Server Error:
+ *     500 Internal Server Error
+ *     {
+ *       "errorMessage": "Something went wrong validating that username, please try again"
+ *     }
+ */
 
 /**
  * @api {post} /api/register Create New User
