@@ -6,6 +6,7 @@ module.exports = { findBy, add, findInfoBy };
 
 // return user object if exists, if not returns undefined
 function findBy(filter) {
+  console.log(filter);
   return db("users")
     .where(filter)
     .first();
