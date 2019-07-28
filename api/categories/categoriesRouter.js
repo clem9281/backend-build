@@ -46,11 +46,11 @@ router.route("/user").get(async (req, res) => {
 module.exports = router;
 
 /**
- * @api {get} /api/habits Get All Categories
+ * @api {get} /api/caetgories Get All Categories
  * @apiName GetCategories
  * @apiGroup Categories
- * @apiHeader {String} authorization Token from login
- * @apiHeaderExample {json} Auth-Example:
+ * @apiHeader (token) {String} authorization Token from login
+ * @apiHeaderExample {json} Auth-Example
                  { "authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle" }
  * @apiSuccess {Array} CategoryArray Array of category objects, each object has category_name property and id
  * @apiSuccessExample Success-Response:
@@ -77,7 +77,7 @@ module.exports = router;
  * @apiErrorExample 500 Internal Server Error:
  *     500 Internal Server Error
  *     {
- *       "errorMessage": "Something went wrong getting the list of habits"
+ *       "errorMessage": "Something went wrong getting the list of categories"
  *     }
  */
 
@@ -85,7 +85,7 @@ module.exports = router;
  * @api {get} /api/categories/user Get User Categories
  * @apiName GetUserCategories
  * @apiGroup Categories
- * @apiHeader {String} authorization Token from login
+ * @apiHeader (token) {String} authorization Token from login
  * @apiHeaderExample {json} Auth-Example:
                  { "authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle" }
  * @apiSuccess {Array} CategoryArray Array of category objects that belongs to the use, each object has category_name and id
@@ -121,7 +121,7 @@ module.exports = router;
  * @api {post} /api/categories Post New Category
  * @apiName PostCategory
  * @apiGroup Categories
- * @apiHeader {json} authorization Token from login
+ * @apiHeader (token) {json} authorization Token from login
  * @apiHeaderExample {json} Auth-Example:
                  { "authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle" }
  * @apiParam (Body) {String} category_name The name of the category you want to add
@@ -162,10 +162,10 @@ module.exports = router;
  *       "errorMessage": "Unauthorized: You don't have authorization for this request"
  *     }
  *
- * @apiError (500) InternalServerError Something went wrong getting the user info.
+ * @apiError (500) InternalServerError Something went wrong adding the category.
  * @apiErrorExample 500 Internal Server Error:
  *     500 Internal Server Error
  *     {
- *       "errorMessage": "Something went wrong when adding the habit"
+ *       "errorMessage": "Something went wrong when adding the category"
  *     }
  */

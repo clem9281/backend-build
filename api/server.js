@@ -6,6 +6,7 @@ const userInfoRouter = require("./userInfo/userInfoRouter");
 
 const categoryRouter = require("./categories/categoriesRouter");
 const habitRouter = require("./habits/habitRouter");
+const completedHabitsRouter = require("./completedHabits/completedHabitsRouter");
 
 const configuremiddleware = require("./configureMiddleware");
 
@@ -19,9 +20,10 @@ const apiDocsPath = path.join(__dirname, "../apidoc");
 server.use("/", express.static(apiDocsPath));
 
 // ROUTES
-server.use("/api", userRouter);
+server.use("/api/auth", userRouter);
 server.use("/api/user-info", restricted, userInfoRouter);
 server.use("/api/habits", restricted, habitRouter);
 server.use("/api/categories", restricted, categoryRouter);
+server.use("/api/completed-today", restricted, completedHabitsRouter);
 
 module.exports = server;

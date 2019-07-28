@@ -8,7 +8,7 @@
     "server": "nodemon index.js",
     "start": "node index.js",
     "apidoc": "apidoc -f backend-build/ '.*\\.js$' -e node_modules/ -o apidoc/",
-    "build-docs": "apidoc-markdown -p ./apidoc/ -o README.md"
+    "build-docs": "apidoc-markdown -p ./apidoc -o README.md"
   },
   "repository": {
     "type": "git",
@@ -34,7 +34,8 @@
     "morgan": "^1.9.1",
     "path": "^0.12.7",
     "pg": "^7.11.0",
-    "sqlite3": "^4.0.9"
+    "sqlite3": "^4.0.9",
+    "ejs": ">=2.5.5"
   },
   "devDependencies": {
     "cross-env": "^5.2.0",

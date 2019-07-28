@@ -6,22 +6,45 @@ const userDb = require("./userModel");
 // DOCUMENTATION AT BOTTOM
 
 const {
-  complexUserInfoExists,
-  simpleUserInfoExists,
-  usernameUnique
+  registerUserInfoExists,
+  loginUserInfoExists,
+  usernameUnique,
+  emailUnique,
+  simpleUserInfoExists
 } = require("../middelware");
 
 const router = express.Router();
 
 router.post(
-  "/register",
-  complexUserInfoExists,
+  "/unique-username",
+  simpleUserInfoExists.username,
   usernameUnique,
+  (req, res) => {
+    res.status(200).json({ message: "That username is available!" });
+  }
+);
+
+router.post(
+  "/unique-email",
+  simpleUserInfoExists.email,
+  emailUnique,
+  (req, res) => {
+    res
+      .status(200)
+      .json({ message: "We don't have an account with that email!" });
+  }
+);
+
+router.post(
+  "/register",
+  registerUserInfoExists,
+  usernameUnique,
+  emailUnique,
   async (req, res) => {
     const user = req.body;
     const hash = bcrypt.hashSync(user.password, 14);
     user.password = hash;
-    console.log(user);
+    console.log("here");
     try {
       const newUser = await userDb.add(user);
 
@@ -34,7 +57,7 @@ router.post(
   }
 );
 
-router.post("/login", simpleUserInfoExists, async (req, res) => {
+router.post("/login", loginUserInfoExists, async (req, res) => {
   const { username, password } = req.body;
   try {
     const user = await userDb.findBy({ username });
@@ -69,7 +92,89 @@ function generateToken(user) {
 module.exports = router;
 
 /**
- * @api {post} /api/register Create New User
+ * @api {post} /api/auth/unique-username Check if Username is Available
+ * @apiName uniqueusername
+ * @apiGroup UserAuth
+ * @apiHeader (token) {String} authorization Token from login
+ * @apiHeaderExample {json} Auth-Example:
+                 { "authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle" }
+ * @apiParam (Body) {String} username The username of the user you want to check
+ * @apiParamExample {json} Request-Body-Example:
+ *     {
+ *       "username": "the_grey"
+ *     }
+ * @apiSuccess {Object} MessageObject Object with message
+ * @apiSuccessExample Success-Response:
+ *     200 OK
+ *     {
+ *       "message": "That username is available!"
+ *     }
+ *
+ * @apiError (4xx) BadRequest Username already exists or required information was not supplied to request body
+ *
+ * @apiErrorExample 400 Bad Request:
+ *     400 Bad Request
+ *     {
+ *       "errorMessage": "Username already exists"
+ *     }
+ *
+ * @apiErrorExample 400 Bad Request:
+ *     400 Bad Request
+ *     {
+ *       "errorMessage": ""Bad request: please include a username""
+ *     }
+ *
+ * @apiError (500) InternalServerError Something went wrong when registering the user.
+ * @apiErrorExample 500 Internal Server Error:
+ *     500 Internal Server Error
+ *     {
+ *       "errorMessage": "Something went wrong validating that username, please try again"
+ *     }
+ */
+
+/**
+ * @api {post} /api/auth/unique-email Check if Email is Available
+ * @apiName uniqueemail
+ * @apiGroup UserAuth
+ * @apiHeader (token) {String} authorization Token from login
+ * @apiHeaderExample {json} Auth-Example:
+                 { "authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle" }
+ *@apiParam (Body) {String} email The email of the user you want to check
+ * @apiParamExample {json} Request-Body-Example:
+ *     {
+ *       "email": "that_wizard@the_fellowship.com"
+ *     }
+ * @apiSuccess {Object} MessageObject Object with message
+ * @apiSuccessExample Success-Response:
+ *     200 OK
+ *     {
+ *       "message": "We don't have an account with that email!"
+ *     }
+ *
+ * @apiError (4xx) BadRequest Email already exists or required information was not supplied to request body
+ *
+ * @apiErrorExample 400 Bad Request:
+ *     400 Bad Request
+ *     {
+ *       "errorMessage": "We already have an account with that email address"
+ *     }
+ *
+ * @apiErrorExample 400 Bad Request:
+ *     400 Bad Request
+ *     {
+ *       "errorMessage": "Bad request: please include an email"
+ *     }
+ *
+ * @apiError (500) InternalServerError Something went wrong when validating the user.
+ * @apiErrorExample 500 Internal Server Error:
+ *     500 Internal Server Error
+ *     {
+ *       "errorMessage": "Something went wrong validating that email, please try again"
+ *     }
+ */
+
+/**
+ * @api {post} /api/auth/register Create New User
  * @apiName RegisterUser
  * @apiGroup UserAuth
  *
@@ -105,7 +210,7 @@ module.exports = router;
  */
 
 /**
- * @api {post} /api/login Login User
+ * @api {post} /api/auth/login Login User
  * @apiName LoginUser
  * @apiGroup UserAuth
  *
@@ -132,7 +237,7 @@ module.exports = router;
  *       "errorMessage": "That username or password is not correct."
  *     }
  *
- * @apiError (500) InternalServerError Something went wrong when registering the user.
+ * @apiError (500) InternalServerError Something went wrong when logging in the user.
  * @apiErrorExample 500 Internal Server Error:
  *     500 Internal Server Error
  *     {
