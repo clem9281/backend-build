@@ -35,9 +35,9 @@ define({ "api": [
     "group": "Categories",
     "header": {
       "fields": {
-        "Header": [
+        "token": [
           {
-            "group": "Header",
+            "group": "token",
             "type": "String",
             "optional": false,
             "field": "authorization",
@@ -47,7 +47,7 @@ define({ "api": [
       },
       "examples": [
         {
-          "title": "Auth-Example:",
+          "title": "Auth-Example",
           "content": "{ \"authorization\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle\" }",
           "type": "json"
         }
@@ -117,9 +117,9 @@ define({ "api": [
     "group": "Categories",
     "header": {
       "fields": {
-        "Header": [
+        "token": [
           {
-            "group": "Header",
+            "group": "token",
             "type": "String",
             "optional": false,
             "field": "authorization",
@@ -199,9 +199,9 @@ define({ "api": [
     "group": "Categories",
     "header": {
       "fields": {
-        "Header": [
+        "token": [
           {
-            "group": "Header",
+            "group": "token",
             "type": "json",
             "optional": false,
             "field": "authorization",
@@ -317,10 +317,10 @@ define({ "api": [
     "group": "CompletedHabits",
     "header": {
       "fields": {
-        "Header": [
+        "token": [
           {
-            "group": "Header",
-            "type": "json",
+            "group": "token",
+            "type": "String",
             "optional": false,
             "field": "authorization",
             "description": "<p>Token from login</p>"
@@ -435,9 +435,9 @@ define({ "api": [
     "group": "CompletedHabits",
     "header": {
       "fields": {
-        "Header": [
+        "token": [
           {
-            "group": "Header",
+            "group": "token",
             "type": "String",
             "optional": false,
             "field": "authorization",
@@ -517,10 +517,10 @@ define({ "api": [
     "group": "CompletedHabits",
     "header": {
       "fields": {
-        "Header": [
+        "token": [
           {
-            "group": "Header",
-            "type": "json",
+            "group": "token",
+            "type": "String",
             "optional": false,
             "field": "authorization",
             "description": "<p>Token from login</p>"
@@ -635,10 +635,10 @@ define({ "api": [
     "group": "Habits",
     "header": {
       "fields": {
-        "Header": [
+        "token": [
           {
-            "group": "Header",
-            "type": "json",
+            "group": "token",
+            "type": "String",
             "optional": false,
             "field": "authorization",
             "description": "<p>Token from login</p>"
@@ -734,9 +734,9 @@ define({ "api": [
     "group": "Habits",
     "header": {
       "fields": {
-        "Header": [
+        "token": [
           {
-            "group": "Header",
+            "group": "token",
             "type": "String",
             "optional": false,
             "field": "authorization",
@@ -816,9 +816,9 @@ define({ "api": [
     "group": "Habits",
     "header": {
       "fields": {
-        "Header": [
+        "token": [
           {
-            "group": "Header",
+            "group": "token",
             "type": "String",
             "optional": false,
             "field": "authorization",
@@ -898,10 +898,10 @@ define({ "api": [
     "group": "Habits",
     "header": {
       "fields": {
-        "Header": [
+        "token": [
           {
-            "group": "Header",
-            "type": "json",
+            "group": "token",
+            "type": "String",
             "optional": false,
             "field": "authorization",
             "description": "<p>Token from login</p>"
@@ -1023,10 +1023,10 @@ define({ "api": [
     "group": "Habits",
     "header": {
       "fields": {
-        "Header": [
+        "token": [
           {
-            "group": "Header",
-            "type": "json",
+            "group": "token",
+            "type": "String",
             "optional": false,
             "field": "authorization",
             "description": "<p>Token from login</p>"
@@ -1301,10 +1301,10 @@ define({ "api": [
     "group": "UserAuth",
     "header": {
       "fields": {
-        "Header": [
+        "token": [
           {
-            "group": "Header",
-            "type": "json",
+            "group": "token",
+            "type": "String",
             "optional": false,
             "field": "authorization",
             "description": "<p>Token from login</p>"
@@ -1408,10 +1408,10 @@ define({ "api": [
     "group": "UserAuth",
     "header": {
       "fields": {
-        "Header": [
+        "token": [
           {
-            "group": "Header",
-            "type": "json",
+            "group": "token",
+            "type": "String",
             "optional": false,
             "field": "authorization",
             "description": "<p>Token from login</p>"
@@ -1515,10 +1515,10 @@ define({ "api": [
     "group": "UserInfo",
     "header": {
       "fields": {
-        "Header": [
+        "token": [
           {
-            "group": "Header",
-            "type": "json",
+            "group": "token",
+            "type": "String",
             "optional": false,
             "field": "authorization",
             "description": "<p>Token from login</p>"
@@ -1597,10 +1597,10 @@ define({ "api": [
     "group": "UserInfo",
     "header": {
       "fields": {
-        "Header": [
+        "token": [
           {
-            "group": "Header",
-            "type": "json",
+            "group": "token",
+            "type": "String",
             "optional": false,
             "field": "authorization",
             "description": "<p>Token from login</p>"
@@ -1679,10 +1679,10 @@ define({ "api": [
     "group": "UserInfo",
     "header": {
       "fields": {
-        "Header": [
+        "token": [
           {
-            "group": "Header",
-            "type": "json",
+            "group": "token",
+            "type": "String",
             "optional": false,
             "field": "authorization",
             "description": "<p>Token from login</p>"
@@ -1810,10 +1810,10 @@ define({ "api": [
     "group": "UserInfo",
     "header": {
       "fields": {
-        "Header": [
+        "token": [
           {
-            "group": "Header",
-            "type": "json",
+            "group": "token",
+            "type": "String",
             "optional": false,
             "field": "authorization",
             "description": "<p>Token from login</p>"

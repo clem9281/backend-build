@@ -53,7 +53,7 @@ module.exports = router;
  * @api {get} /api/completed-today List of Tasks Completed Today
  * @apiName GetListToday
  * @apiGroup CompletedHabits
- * @apiHeader {String} authorization Token from login
+ * @apiHeader (token) {String} authorization Token from login
  * @apiHeaderExample {json} Auth-Example:
                  { "authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle" }
  * @apiSuccess {Array} CategoryArray Array of category objects, each object has category_name property and id
@@ -95,7 +95,7 @@ module.exports = router;
  * @api {post} /api/completed-today Mark a User Habit as Completed Today
  * @apiName PostCompletedHabits
  * @apiGroup CompletedHabits
- * @apiHeader {json} authorization Token from login
+ * @apiHeader (token) {String} authorization Token from login
  * @apiHeaderExample {json} Auth-Example:
                  { "authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle" }
  * @apiParam (Body) {String} habit_id The id of the habit you would like to mark complete
@@ -155,7 +155,7 @@ module.exports = router;
  * @api {delete} /api/completed-today Mark a User Habit as NOT Completed Today
  * @apiName DeleteCompletedHabits
  * @apiGroup CompletedHabits
- * @apiHeader {json} authorization Token from login
+ * @apiHeader (token) {String} authorization Token from login
  * @apiHeaderExample {json} Auth-Example:
                  { "authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle" }
  * @apiParam (Body) {String} habit_id The id of the habit you would like to mark complete

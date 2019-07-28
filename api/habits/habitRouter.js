@@ -110,7 +110,7 @@ module.exports = router;
  * @api {get} /api/habits Get All Habits
  * @apiName GetHabits
  * @apiGroup Habits
- * @apiHeader {String} authorization Token from login
+ * @apiHeader (token) {String} authorization Token from login
  * @apiHeaderExample {json} Auth-Example:
                  { "authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle" }
  * @apiSuccess {Array} HabitArray Array of habit objects, each object has habit_name property and id
@@ -146,7 +146,7 @@ module.exports = router;
  * @api {get} /api/habits/user Get User Habits
  * @apiName GetUserHabits
  * @apiGroup Habits
- * @apiHeader {String} authorization Token from login
+ * @apiHeader (token) {String} authorization Token from login
  * @apiHeaderExample {json} Auth-Example:
                  { "authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle" }
  * @apiSuccess {Array} HabitArray Array of habit objects, each object has habit_name property, category_name and id
@@ -184,7 +184,7 @@ module.exports = router;
  * @api {post} /api/habits/user Post New Habit To User
  * @apiName PostUserHabits
  * @apiGroup Habits
- * @apiHeader {json} authorization Token from login
+ * @apiHeader (token) {String} authorization Token from login
  * @apiHeaderExample {json} Auth-Example:
                  { "authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle" }
  * @apiParam (Body) {String} habit_name The name of the habit you want to add
@@ -250,7 +250,7 @@ module.exports = router;
  * @api {put} /api/habits/user/:userHabit_id Update the User's Habit
  * @apiName PutUserHabits
  * @apiGroup Habits
- * @apiHeader {json} authorization Token from login
+ * @apiHeader (token) {String} authorization Token from login
  * @apiHeaderExample {json} Auth-Example:
                  { "authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle" }
  * @apiParam (Body) {String} habit_name The name of the habit you want to change to
@@ -316,7 +316,7 @@ module.exports = router;
  * @api {delete} /api/habits/user/:userHabit_id Delete the User's Habit
  * @apiName DeleteUserHabits
  * @apiGroup Habits
- * @apiHeader {json} authorization Token from login
+ * @apiHeader (token) {String} authorization Token from login
  * @apiHeaderExample {json} Auth-Example:
                  { "authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle" }
  * @apiParam (Params) {Number} userHabit_id The id of the userHabit relationship you want to delete

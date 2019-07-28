@@ -95,7 +95,7 @@ module.exports = router;
  * @api {post} /api/auth/unique-username Check if Username is Available
  * @apiName uniqueusername
  * @apiGroup UserAuth
- * @apiHeader {json} authorization Token from login
+ * @apiHeader (token) {String} authorization Token from login
  * @apiHeaderExample {json} Auth-Example:
                  { "authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle" }
  * @apiParam (Body) {String} username The username of the user you want to check
@@ -136,7 +136,7 @@ module.exports = router;
  * @api {post} /api/auth/unique-email Check if Email is Available
  * @apiName uniqueemail
  * @apiGroup UserAuth
- * @apiHeader {json} authorization Token from login
+ * @apiHeader (token) {String} authorization Token from login
  * @apiHeaderExample {json} Auth-Example:
                  { "authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle" }
  *@apiParam (Body) {String} email The email of the user you want to check
