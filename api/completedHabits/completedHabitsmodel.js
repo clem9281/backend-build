@@ -2,11 +2,12 @@ const db = require("../../data/dbConfig");
 const moment = require("moment");
 
 module.exports = {
-  getList
+  getList,
+  addCompleted
 };
 
 async function getList(id) {
-  // Get a list of the tasks that belong to the user and were completed today
+  // Get a list of the tasks that were completed today
   const completedToday = await db("userCompleted").where(
     "completed_date",
     moment().format("YYYY-M-D")
@@ -20,6 +21,7 @@ async function getList(id) {
     .join("categories", "categories.id", "userHabits.category_id")
     .select(
       "userHabits.id as id",
+      "habits.id as habit_id",
       "habits.habit_name",
       "categories.category_name"
     );
@@ -33,8 +35,22 @@ async function getList(id) {
       }
     });
     return list;
-    // return an empty list if the user has not habits
+    // return an empty list if the user has no habits
   } else {
     return [];
   }
+}
+
+async function addCompleted(habitId, userId) {
+  const userHabit = await db("userHabits")
+    .where({
+      user_id: userId,
+      habit_id: habitId
+    })
+    .first();
+  const [id] = await db("userCompleted").insert({
+    userHabit_id: userHabit.id,
+    completed_date: moment().format("YYYY-M-D")
+  });
+  return getList(userId);
 }
