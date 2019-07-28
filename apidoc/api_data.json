@@ -628,6 +628,105 @@
     "groupTitle": "CompletedHabits"
   },
   {
+    "type": "delete",
+    "url": "/api/habits/user/:userHabit_id",
+    "title": "Delete the User's Habit",
+    "name": "DeleteUserHabits",
+    "group": "Habits",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "json",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Token from login</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Auth-Example:",
+          "content": "{ \"authorization\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle\" }",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Params": [
+          {
+            "group": "Params",
+            "type": "Number",
+            "optional": false,
+            "field": "userHabit_id",
+            "description": "<p>The id of the userHabit relationship you want to delete</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-PArams-Example:",
+          "content": "\"/api/habits/user/3\"",
+          "type": "Number"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Array",
+            "optional": false,
+            "field": "HabitArray",
+            "description": "<p>Array of habit objects, minus the deleted habit, each object has habit_name property, category_name and uerHabit_id and habit_id</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "201 OK\n[\n      {\n        \"userHabit_id\": 4,\n        \"habit_id\": 4,\n        \"habit_name\": \"call eagles\",\n        \"category_name\": \"relationships\"\n      }\n    ]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "401 Unauthorized:",
+          "content": "401 Unauthorized\n{\n  \"errorMessage\": \"Unauthorized: You don't have authorization for this request\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "404 NotFound:",
+          "content": "401 NotFound\n{\n  \"errorMessage\": \"The user does not have that habit to delete\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "500 Internal Server Error:",
+          "content": "500 Internal Server Error\n{\n  \"errorMessage\": \"Something went wrong when adding the habit\"\n}",
+          "type": "json"
+        }
+      ],
+      "fields": {
+        "500": [
+          {
+            "group": "500",
+            "optional": false,
+            "field": "InternalServerError",
+            "description": "<p>Something went wrong adding the habit.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "./api/habits/habitRouter.js",
+    "groupTitle": "Habits"
+  },
+  {
     "type": "get",
     "url": "/api/habits",
     "title": "Get All Habits",
@@ -839,7 +938,7 @@
       "examples": [
         {
           "title": "Request-Body-Example:",
-          "content": "{\n  \"habit_name\": \"Walk into mordor\",\n  \"category_name\": \"Fitness\"\n}",
+          "content": "{\n      \"habit_name\": \"Save Rohan\",\n      \"category_name\": \"relationships\"\n    }",
           "type": "json"
         }
       ]
@@ -852,14 +951,14 @@
             "type": "Array",
             "optional": false,
             "field": "HabitArray",
-            "description": "<p>Array of habit objects, including the new habit, each object has habit_name property, category_name and id</p>"
+            "description": "<p>Array of habit objects, including the new habit, each object has habit_name property, category_name, userHAbit_id and habit_id</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "201 OK\n[\n   {\n     \"id\": 1,\n     \"habit_name\": \"Walk into mordor\",\n     \"category_name\": \"Fitness\"\n   },\n   {\n     \"id\": 2,\n     \"habit_name\": \"Don't put on the ring\",\n     \"category_name\": \"Spirituality\"\n   },\n ]",
+          "content": "201 OK\n[\n      {\n        \"userHabit_id\": 4,\n        \"habit_id\": 4,\n        \"habit_name\": \"call eagles\",\n        \"category_name\": \"relationships\"\n      },\n      {\n        \"userHabit_id\": 3,\n        \"habit_id\": 5,\n        \"habit_name\": \"walk into mordor\",\n        \"category_name\": \"physical wellness\"\n      },\n      {\n        \"userHabit_id\": 5,\n        \"habit_id\": 6,\n        \"habit_name\": \"Save Rohan\",\n        \"category_name\": \"relationships\"\n      }\n  ]",
           "type": "json"
         }
       ]
@@ -903,6 +1002,144 @@
         {
           "title": "401 Unauthorized:",
           "content": "401 Unauthorized\n{\n  \"errorMessage\": \"Unauthorized: You don't have authorization for this request\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "500 Internal Server Error:",
+          "content": "500 Internal Server Error\n{\n  \"errorMessage\": \"Something went wrong when adding the habit\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./api/habits/habitRouter.js",
+    "groupTitle": "Habits"
+  },
+  {
+    "type": "put",
+    "url": "/api/habits/user/:userHabit_id",
+    "title": "Update the User's Habit",
+    "name": "PutUserHabits",
+    "group": "Habits",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "json",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Token from login</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Auth-Example:",
+          "content": "{ \"authorization\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle\" }",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Body": [
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "habit_name",
+            "description": "<p>The name of the habit you want to change to</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "category_name",
+            "description": "<p>The category of the habit you want to change to</p>"
+          }
+        ],
+        "Params": [
+          {
+            "group": "Params",
+            "type": "Number",
+            "optional": false,
+            "field": "userHabit_id",
+            "description": "<p>The id of the userHabit relationship you want to alter</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Body-Example:",
+          "content": "{\n  \"habit_name\": \"Walk into mordor\",\n  \"category_name\": \"Fitness\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Request-PArams-Example:",
+          "content": "\"/api/habits/user/3\"",
+          "type": "Number"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Array",
+            "optional": false,
+            "field": "HabitArray",
+            "description": "<p>Array of habit objects, including the new habit, each object has habit_name property, category_name userHabit_id and habit_id</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "201 OK\n[\n      {\n        \"userHabit_id\": 4,\n        \"habit_id\": 4,\n        \"habit_name\": \"call eagles\",\n        \"category_name\": \"relationships\"\n      },\n      {\n        \"userHabit_id\": 3,\n        \"habit_id\": 5,\n        \"habit_name\": \"walk into mordor\",\n        \"category_name\": \"physical wellness\"\n      }\n    ]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "500": [
+          {
+            "group": "500",
+            "optional": false,
+            "field": "InternalServerError",
+            "description": "<p>Something went wrong adding the habit.</p>"
+          }
+        ],
+        "4xx": [
+          {
+            "group": "4xx",
+            "optional": false,
+            "field": "BadRequest:",
+            "description": "<p>Either the request is missing the habit_name or category name property or a habit already exists with that category</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "400 Bad Request:",
+          "content": "400 Bad Request\n{\n  \"errorMessage\": \"Please include a habit_name and category_name for the habit you would like to add\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "400 BadRequest:",
+          "content": "400 Bad Request\n{\n  \"errorMessage\": \"There is already a habit with that category\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "401 Unauthorized:",
+          "content": "401 Unauthorized\n{\n  \"errorMessage\": \"Unauthorized: You don't have authorization for this request\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "404 NotFound:",
+          "content": "401 NotFound\n{\n  \"errorMessage\": \"The user does not have that habit to update\"\n}",
           "type": "json"
         },
         {
@@ -1557,6 +1794,130 @@
         {
           "title": "500 Internal Server Error:",
           "content": "500 Internal Server Error\n{\n  \"errorMessage\": \"Something went wrong updating the user info\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./api/userInfo/userInfoRouter.js",
+    "groupTitle": "UserInfo"
+  },
+  {
+    "type": "put",
+    "url": "/api/user-info/password",
+    "title": "Update the User Password",
+    "name": "updateUserPassword",
+    "group": "UserInfo",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "json",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Token from login</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Auth-Example:",
+          "content": "{ \"authorization\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle\" }",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Body": [
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>The user's current password</p>"
+          },
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "new_password",
+            "description": "<p>The user's new password</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Body-Example:",
+          "content": "    {\n          \"password\": \"pass\",\n\t        \"new_password\": \"pass1\"\n        }",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "UserObject",
+            "description": "<p>Object with user properties: name email id and username</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "200 OK\n{\n      \"id\": 2,\n      \"username\": \"the_wizard_of_many_colors\",\n      \"name\": \"Gandalf\",\n      \"email\": \"that_wizard@the_fellowship.com\"\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "500": [
+          {
+            "group": "500",
+            "optional": false,
+            "field": "InternalServerError",
+            "description": "<p>Something went wrong when updating your password.</p>"
+          }
+        ],
+        "4xx": [
+          {
+            "group": "4xx",
+            "optional": false,
+            "field": "BadRequest",
+            "description": "<p>Either the user sent the wrong original password, or the user does not exist somehow.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "400 Bad Request:",
+          "content": "400 Bad Request\n{\n  \"errorMessage\": \"Bad request: please send your old password and what you would like to change it to.\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "401 Unauthorized:",
+          "content": "401 Unauthorized\n{\n  \"errorMessage\": \"We already have an account with that email address\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "400 Bad Request:",
+          "content": "400 Bad Request\n{\n  \"errorMessage\": \"Bad request: please include a username, name and email\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "404 Not Found:",
+          "content": "404 Not Found\n{\n  \"errorMessage\":  \"We cannot authorize this request: either the password was wrong or the user does not exist\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "500 Internal Server Error:",
+          "content": "500 Internal Server Error\n{\n  \"errorMessage\": \"Something went wrong updating your password\"\n}",
           "type": "json"
         }
       ]

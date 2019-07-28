@@ -7,14 +7,15 @@ module.exports = {
   addHabit,
   findUserHabitsBy,
   addUserHabit,
-  find
+  find,
+  updateUserHabit,
+  deleteUserHabit
 };
 
 function find() {
   return db("habits");
 }
 function findHabitsBy(filter) {
-  console.log(filter);
   return db("habits")
     .where(filter)
     .first();
@@ -23,7 +24,9 @@ function findHabitsBy(filter) {
 function addHabit(habit) {
   return db("habits")
     .insert(habit, "id")
-    .then(([id]) => findHabitsBy({ id }));
+    .then(([id]) => {
+      return findHabitsBy({ id });
+    });
 }
 
 // Find user habits by filter
@@ -31,8 +34,48 @@ function findUserHabitsBy(filter) {
   return db("userHabits")
     .join("habits", "habits.id", "userHabits.habit_id")
     .join("categories", "categories.id", "userHabits.category_id")
-    .select("habits.id", "habits.habit_name", "categories.category_name")
+    .select(
+      "userHabits.id as userHabit_id",
+      "habits.id as habit_id",
+      "habits.habit_name",
+      "categories.category_name"
+    )
     .where(filter);
+}
+
+async function updateUserHabit(habitInfo, id) {
+  // if the habit exists in the habit table, we need to get its id to update the userHabits table
+  const { habit_name, category_name, userHabit_id } = habitInfo;
+  let habit = await findHabitsBy({ habit_name });
+
+  // also get the category id to update the userHabits entry
+  const category = await categoriesDb.findCategoryBy({
+    category_name
+  });
+
+  if (!habit) {
+    habit = await addHabit({ habit_name: habitInfo.habit_name });
+  }
+  const updated = await db("userHabits")
+    .where({
+      id: userHabit_id
+    })
+    .update({ habit_id: habit.id, category_id: category.id });
+  if (updated) {
+    return findUserHabitsBy({ user_id: id });
+  } else {
+    return null;
+  }
+}
+async function deleteUserHabit(userHabitId, userId) {
+  const deleted = await db("userHabits")
+    .where({ id: userHabitId })
+    .del();
+  if (deleted) {
+    return findUserHabitsBy({ user_id: userId });
+  } else {
+    return null;
+  }
 }
 
 async function addUserHabit(newHabitInfo) {
