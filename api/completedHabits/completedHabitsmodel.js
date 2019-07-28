@@ -3,7 +3,8 @@ const moment = require("moment");
 
 module.exports = {
   getList,
-  addCompleted
+  addCompleted,
+  deleteCompleted
 };
 
 async function getList(id) {
@@ -52,5 +53,18 @@ async function addCompleted(habitId, userId) {
     userHabit_id: userHabit.id,
     completed_date: moment().format("YYYY-M-D")
   });
+  return getList(userId);
+}
+
+async function deleteCompleted(habitId, userId) {
+  const userHabit = await db("userHabits")
+    .where({
+      user_id: userId,
+      habit_id: habitId
+    })
+    .first();
+  const count = await db("userCompleted")
+    .where({ userHabit_id: userHabit.id })
+    .del();
   return getList(userId);
 }

@@ -1,6 +1,7 @@
 const habitsDb = require("../../../habits/habitModel");
 
 module.exports = async (req, res, next) => {
+  console.log(req.body);
   if (!req.body.habit_id) {
     res.status(400).json({
       errorMessage: "Bad Request: please include the habit_id with your request"

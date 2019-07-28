@@ -338,6 +338,324 @@
     "groupTitle": "Categories"
   },
   {
+    "type": "delete",
+    "url": "/api/completed-today",
+    "title": "Mark a User Habit as NOT Completed Today",
+    "name": "DeleteCompletedHabits",
+    "group": "CompletedHabits",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "json",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Token from login</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Auth-Example:",
+          "content": "{ \"authorization\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle\" }",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Body": [
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "habit_id",
+            "description": "<p>The id of the habit you would like to mark complete</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Body-Example:",
+          "content": "{\n  \"habit_id\": 1\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Array",
+            "optional": false,
+            "field": "CompletedArray",
+            "description": "<p>Array of habit objects, each object has the id of the relationship, habit_name property, habit_id property, category_name and a completed field that is either true or false</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "201 OK\n[\n    {\n      \"id\": 1,\n      \"habit_id\": 1,\n      \"habit_name\": \"get to mordor\",\n      \"category_name\": \"physical wellness\",\n      \"completed\": false\n    },\n    {\n      \"id\": 2,\n      \"habit_id\": 2,\n      \"habit_name\": \"destroy the ring\",\n      \"category_name\": \"spirituality\",\n      \"completed\": true\n    }\n  ]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "500": [
+          {
+            "group": "500",
+            "optional": false,
+            "field": "InternalServerError",
+            "description": "<p>Something went wrong getting the user info.</p>"
+          }
+        ],
+        "4xx": [
+          {
+            "group": "4xx",
+            "optional": false,
+            "field": "BadRequest:",
+            "description": "<p>Either the request is missing the habit_id property or that habit/user relationship does not exist</p>"
+          },
+          {
+            "group": "4xx",
+            "optional": false,
+            "field": "Unauthorized:",
+            "description": "<p>You don't have authorization for this request</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "400 Bad Request:",
+          "content": "400 Bad Request\n{\n  \"errorMessage\": \"Bad Request: please include the habit_id with your request\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "404 NotFound:",
+          "content": "404 Not Found\n{\n  \"errorMessage\": \"We could not find that habit for that user\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "401 Unauthorized:",
+          "content": "401 Unauthorized\n{\n  \"errorMessage\": \"Unauthorized: You don't have authorization for this request\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "500 Internal Server Error:",
+          "content": "500 Internal Server Error\n{\n  \"errorMessage\": \"Something went wrong marking that habit as NOT completed for today.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./api/completedHabits/completedHabitsRouter.js",
+    "groupTitle": "CompletedHabits"
+  },
+  {
+    "type": "get",
+    "url": "/api/completed-today",
+    "title": "List of Tasks Completed Today",
+    "name": "GetListToday",
+    "group": "CompletedHabits",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Token from login</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Auth-Example:",
+          "content": "{ \"authorization\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle\" }",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Array",
+            "optional": false,
+            "field": "CategoryArray",
+            "description": "<p>Array of category objects, each object has category_name property and id</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": " 200 OK\n[\n     {\n       \"id\": 1,\n       \"habit_id\": 1,\n       \"habit_name\": \"get to mordor\",\n       \"category_name\": \"physical wellness\",\n       \"completed\": true\n     },\n     {\n       \"id\": 2,\n       \"habit_id\": 2,\n       \"habit_name\": \"destroy the ring\",\n       \"category_name\": \"spirituality\",\n       \"completed\": false\n     }\n   ]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "401": [
+          {
+            "group": "401",
+            "optional": false,
+            "field": "Unauthorized:",
+            "description": "<p>You don't have authorization for this request</p>"
+          }
+        ],
+        "500": [
+          {
+            "group": "500",
+            "optional": false,
+            "field": "InternalServerError",
+            "description": "<p>Something went wrong getting the list of categories.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "401 Unauthorized:",
+          "content": "401 Unauthorized\n{\n  \"errorMessage\": \"Unauthorized: You don't have authorization for this request\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "500 Internal Server Error:",
+          "content": "500 Internal Server Error\n{\n  \"errorMessage\": \"Something went wrong getting the list of habits\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./api/completedHabits/completedHabitsRouter.js",
+    "groupTitle": "CompletedHabits"
+  },
+  {
+    "type": "post",
+    "url": "/api/completed-today",
+    "title": "Mark a User Habit as Completed Today",
+    "name": "PostCompletedHabits",
+    "group": "CompletedHabits",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "json",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Token from login</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Auth-Example:",
+          "content": "{ \"authorization\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle\" }",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Body": [
+          {
+            "group": "Body",
+            "type": "String",
+            "optional": false,
+            "field": "habit_id",
+            "description": "<p>The id of the habit you would like to mark complete</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Body-Example:",
+          "content": "{\n  \"habit_id\": 2\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Array",
+            "optional": false,
+            "field": "CompletedArray",
+            "description": "<p>Array of habit objects, each object has the id of the relationship, habit_name property, habit_id property, category_name and a completed field that is either true or false</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "201 OK\n[\n    {\n      \"id\": 1,\n      \"habit_id\": 1,\n      \"habit_name\": \"get to mordor\",\n      \"category_name\": \"physical wellness\",\n      \"completed\": true\n    },\n    {\n      \"id\": 2,\n      \"habit_id\": 2,\n      \"habit_name\": \"destroy the ring\",\n      \"category_name\": \"spirituality\",\n      \"completed\": true\n    }\n  ]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "500": [
+          {
+            "group": "500",
+            "optional": false,
+            "field": "InternalServerError",
+            "description": "<p>Something went wrong getting the user info.</p>"
+          }
+        ],
+        "4xx": [
+          {
+            "group": "4xx",
+            "optional": false,
+            "field": "BadRequest:",
+            "description": "<p>Either the request is missing the habit_id property or that habit/user relationship does not exist</p>"
+          },
+          {
+            "group": "4xx",
+            "optional": false,
+            "field": "Unauthorized:",
+            "description": "<p>You don't have authorization for this request</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "400 Bad Request:",
+          "content": "400 Bad Request\n{\n  \"errorMessage\": \"Bad Request: please include the habit_id with your request\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "404 NotFound:",
+          "content": "404 Not Found\n{\n  \"errorMessage\": \"We could not find that habit for that user\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "401 Unauthorized:",
+          "content": "401 Unauthorized\n{\n  \"errorMessage\": \"Unauthorized: You don't have authorization for this request\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "500 Internal Server Error:",
+          "content": "500 Internal Server Error\n{\n  \"errorMessage\": \"Something went wrong marking that habit as completed for today.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./api/completedHabits/completedHabitsRouter.js",
+    "groupTitle": "CompletedHabits"
+  },
+  {
     "type": "get",
     "url": "/api/habits",
     "title": "Get All Habits",
