@@ -22,9 +22,9 @@ router
   })
   .post(completedHabit, async (req, res) => {
     const id = req.userId;
-    const habitId = req.body.habit_id;
+    const userHabitId = req.body.userHabit_id;
     try {
-      const list = await completedDb.addCompleted(habitId, id);
+      const list = await completedDb.addCompleted(userHabitId, id);
       res.status(201).json(list);
     } catch (error) {
       res.status(500).json({
@@ -35,9 +35,9 @@ router
   })
   .delete(completedHabit, async (req, res) => {
     const id = req.userId;
-    const habitId = req.body.habit_id;
+    const userHabitId = req.body.userHabit_id;
     try {
-      const list = await completedDb.deleteCompleted(habitId, id);
+      const list = await completedDb.deleteCompleted(userHabitId, id);
       res.status(200).json(list);
     } catch (error) {
       res.status(500).json({
@@ -61,17 +61,17 @@ module.exports = router;
  *     200 OK
  *    [
         {
-          "id": 1,
-          "habit_id": 1,
-          "habit_name": "get to mordor",
-          "category_name": "physical wellness",
-          "completed": true
+          "userHabit_id": 4,
+          "habit_id": 4,
+          "habit_name": "call eagles",
+          "category_name": "relationships",
+          "completed": false
         },
         {
-          "id": 2,
-          "habit_id": 2,
-          "habit_name": "destroy the ring",
-          "category_name": "spirituality",
+          "userHabit_id": 3,
+          "habit_id": 5,
+          "habit_name": "walk into mordor",
+          "category_name": "physical wellness",
           "completed": false
         }
       ]
@@ -101,25 +101,25 @@ module.exports = router;
  * @apiParam (Body) {String} habit_id The id of the habit you would like to mark complete
  * @apiParamExample {json} Request-Body-Example:
  *     {
- *       "habit_id": 2
+ *       "userHabit_id": 4
  *     }
  * @apiSuccess {Array} CompletedArray Array of habit objects, each object has the id of the relationship, habit_name property, habit_id property, category_name and a completed field that is either true or false
  * @apiSuccessExample Success-Response:
  *     201 OK
  *     [
         {
-          "id": 1,
-          "habit_id": 1,
-          "habit_name": "get to mordor",
-          "category_name": "physical wellness",
+          "userHabit_id": 4,
+          "habit_id": 4,
+          "habit_name": "call eagles",
+          "category_name": "relationships",
           "completed": true
         },
         {
-          "id": 2,
-          "habit_id": 2,
-          "habit_name": "destroy the ring",
-          "category_name": "spirituality",
-          "completed": true
+          "userHabit_id": 3,
+          "habit_id": 5,
+          "habit_name": "walk into mordor",
+          "category_name": "physical wellness",
+          "completed": false
         }
       ]
  *
@@ -161,25 +161,25 @@ module.exports = router;
  * @apiParam (Body) {String} habit_id The id of the habit you would like to mark complete
  * @apiParamExample {json} Request-Body-Example:
  *     {
- *       "habit_id": 1
+ *       "userHabit_id": 4
  *     }
  * @apiSuccess {Array} CompletedArray Array of habit objects, each object has the id of the relationship, habit_name property, habit_id property, category_name and a completed field that is either true or false
  * @apiSuccessExample Success-Response:
  *     201 OK
  *     [
         {
-          "id": 1,
-          "habit_id": 1,
-          "habit_name": "get to mordor",
-          "category_name": "physical wellness",
+          "userHabit_id": 4,
+          "habit_id": 4,
+          "habit_name": "call eagles",
+          "category_name": "relationships",
           "completed": false
         },
         {
-          "id": 2,
-          "habit_id": 2,
-          "habit_name": "destroy the ring",
-          "category_name": "spirituality",
-          "completed": true
+          "userHabit_id": 3,
+          "habit_id": 5,
+          "habit_name": "walk into mordor",
+          "category_name": "physical wellness",
+          "completed": false
         }
       ]
  *

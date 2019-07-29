@@ -1,16 +1,15 @@
 const habitsDb = require("../../../habits/habitModel");
 
 module.exports = async (req, res, next) => {
-  console.log(req.body);
-  if (!req.body.habit_id) {
+  if (!req.body.userHabit_id) {
     res.status(400).json({
-      errorMessage: "Bad Request: please include the habit_id with your request"
+      errorMessage:
+        "Bad Request: please include the userHabit_id with your request"
     });
   } else {
     const userHabit = await habitsDb
       .findUserHabitsBy({
-        habit_id: req.body.habit_id,
-        user_id: req.userId
+        userHabit_id: req.body.userHabit_id
       })
       .first();
     if (userHabit) {

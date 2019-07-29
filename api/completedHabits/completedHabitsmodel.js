@@ -21,7 +21,7 @@ async function getList(id) {
     .join("habits", "habits.id", "userHabits.habit_id")
     .join("categories", "categories.id", "userHabits.category_id")
     .select(
-      "userHabits.id as id",
+      "userHabits.id as userHabit_id",
       "habits.id as habit_id",
       "habits.habit_name",
       "categories.category_name"
@@ -29,7 +29,7 @@ async function getList(id) {
   // make sure there is a list of userHabits to map over before we try to map over it, then map over it and if the completedTodayIds contains the id of the userHabit, then it is complete mark it true, otherwise mark it false
   if (allUserHabits.length > 0) {
     let list = allUserHabits.map(el => {
-      if (completedTodayIds.includes(el.id)) {
+      if (completedTodayIds.includes(el.userHabit_id)) {
         return { ...el, completed: true };
       } else {
         return { ...el, completed: false };
@@ -42,16 +42,10 @@ async function getList(id) {
   }
 }
 
-async function addCompleted(habitId, userId) {
-  const userHabit = await db("userHabits")
-    .where({
-      user_id: userId,
-      habit_id: habitId
-    })
-    .first();
+async function addCompleted(userHabit_id, userId) {
   const [id] = await db("userCompleted").insert(
     {
-      userHabit_id: userHabit.id,
+      userHabit_id: userHabit_id,
       completed_date: moment().format("YYYY-M-D")
     },
     "id"
@@ -59,15 +53,9 @@ async function addCompleted(habitId, userId) {
   return getList(userId);
 }
 
-async function deleteCompleted(habitId, userId) {
-  const userHabit = await db("userHabits")
-    .where({
-      user_id: userId,
-      habit_id: habitId
-    })
-    .first();
+async function deleteCompleted(userHabitId, userId) {
   const count = await db("userCompleted")
-    .where({ userHabit_id: userHabit.id })
+    .where({ userHabit_id: userHabitId })
     .del();
   return getList(userId);
 }
