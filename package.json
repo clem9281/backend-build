@@ -7,8 +7,9 @@
     "test": "cross-env process.env.DB_ENV=testing jest --watch --verbose",
     "server": "nodemon index.js",
     "start": "node index.js",
-    "apidoc": "apidoc -f backend-build/ '.*\\.js$' -e node_modules/ -o apidoc/",
-    "build-docs": "apidoc-markdown -p ./apidoc -o README.md"
+    "apidocs": "apidoc -f backend-build/ '.*\\.js$' -e node_modules/ -o docs/",
+    "build-docs": "apidoc-markdown -p ./docs/ -o README.md",
+    "build-api": "npm-run-all apidocs build-docs"
   },
   "repository": {
     "type": "git",
@@ -22,9 +23,12 @@
   },
   "homepage": "https://github.com/clem9281/backend-build#readme",
   "dependencies": {
+    "apidoc": "^0.17.7",
     "apidoc-markdown": "^0.2.1",
     "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
     "dotenv": "^8.0.0",
+    "ejs": ">=2.5.5",
     "express": "^4.17.1",
     "helmet": "^3.20.0",
     "jsonwebtoken": "^8.5.1",
@@ -32,10 +36,10 @@
     "knex-cleaner": "^1.2.1",
     "moment": "^2.24.0",
     "morgan": "^1.9.1",
+    "npm-run-all": "^4.1.5",
     "path": "^0.12.7",
     "pg": "^7.11.0",
-    "sqlite3": "^4.0.9",
-    "ejs": ">=2.5.5"
+    "sqlite3": "^4.0.9"
   },
   "devDependencies": {
     "cross-env": "^5.2.0",

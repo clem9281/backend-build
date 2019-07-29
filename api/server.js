@@ -16,7 +16,7 @@ const server = express();
 configuremiddleware(server);
 
 // API DOCS
-const apiDocsPath = path.join(__dirname, "../apidoc");
+const apiDocsPath = path.join(__dirname, "../docs");
 server.use("/", express.static(apiDocsPath));
 
 // ROUTES

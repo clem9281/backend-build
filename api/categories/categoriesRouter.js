@@ -47,12 +47,15 @@ module.exports = router;
 
 /**
  * @api {get} /api/caetgories Get All Categories
+ * @apiVersion 1.0.0
  * @apiName GetCategories
  * @apiGroup Categories
+ * @apiExample Request
+ *      axios.get('/api/categories');
  * @apiHeader (token) {String} authorization Token from login
  * @apiHeaderExample {json} Auth-Example
                  { "authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle" }
- * @apiSuccess {Array} CategoryArray Array of category objects, each object has category_name property and id
+ * @apiSuccess (Success 200) {Array} CategoryArray Array of category objects, each object has category_name property and id
  * @apiSuccessExample Success-Response:
  *     200 OK
  * [
@@ -83,12 +86,15 @@ module.exports = router;
 
 /**
  * @api {get} /api/categories/user Get User Categories
+ * @apiVersion 1.0.0
  * @apiName GetUserCategories
  * @apiGroup Categories
+ * @apiExample Request
+ *      axios.get('/api/categories/user');
  * @apiHeader (token) {String} authorization Token from login
  * @apiHeaderExample {json} Auth-Example:
                  { "authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle" }
- * @apiSuccess {Array} CategoryArray Array of category objects that belongs to the use, each object has category_name and id
+ * @apiSuccess (Success 200) {Array} CategoryArray Array of category objects that belongs to the use, each object has category_name and id
  * @apiSuccessExample Success-Response:
  *     200 OK
  * [
@@ -119,8 +125,11 @@ module.exports = router;
 
 /**
  * @api {post} /api/categories Post New Category
+ * @apiVersion 1.0.0
  * @apiName PostCategory
  * @apiGroup Categories
+ * @apiExample Request
+ *        axios.post('/api/categories', {category_name: "fitness"});
  * @apiHeader (token) {json} authorization Token from login
  * @apiHeaderExample {json} Auth-Example:
                  { "authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle" }
@@ -129,7 +138,7 @@ module.exports = router;
  *     {
  *       "category_name": "Fitness"
  *     }
- * @apiSuccess {Array} CategoryArray Array of category objects, including the new category, each object has category_name property and id
+ * @apiSuccess (Success 200) {Array} CategoryArray Array of category objects, including the new category, each object has category_name property and id
  * @apiSuccessExample Success-Response:
  *     201 OK
  *     [
@@ -155,7 +164,7 @@ module.exports = router;
  *     {
  *       "errorMessage": "Bad request: that category already exists and cannot be added"
  *     }
- * @apiError (4xx) Unauthorized: You don't have authorization for this request
+ * 
  * @apiErrorExample 401 Unauthorized:
  *     401 Unauthorized
  *     {

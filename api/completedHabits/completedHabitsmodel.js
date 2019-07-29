@@ -4,8 +4,13 @@ const moment = require("moment");
 module.exports = {
   getList,
   addCompleted,
-  deleteCompleted
+  deleteCompleted,
+  getBy
 };
+
+function getBy(filter) {
+  return db("userCompleted").where(filter);
+}
 
 async function getList(id) {
   // Get a list of the tasks that were completed today

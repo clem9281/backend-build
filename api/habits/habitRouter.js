@@ -108,12 +108,15 @@ module.exports = router;
 
 /**
  * @api {get} /api/habits Get All Habits
+ * @apiVersion 1.0.0
  * @apiName GetHabits
  * @apiGroup Habits
+ * @apiExample Request
+ * axios.get('/api/habits');
  * @apiHeader (token) {String} authorization Token from login
  * @apiHeaderExample {json} Auth-Example:
                  { "authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle" }
- * @apiSuccess {Array} HabitArray Array of habit objects, each object has habit_name property and id
+ * @apiSuccess (Success 200) {Array} HabitArray Array of habit objects, each object has habit_name property and id
  * @apiSuccessExample Success-Response:
  *     200 OK
  * [
@@ -144,12 +147,15 @@ module.exports = router;
 
 /**
  * @api {get} /api/habits/user Get User Habits
+ * @apiVersion 1.0.0
  * @apiName GetUserHabits
  * @apiGroup Habits
+ * @apiExample Request
+ * axios.get('/api/habits/user);
  * @apiHeader (token) {String} authorization Token from login
  * @apiHeaderExample {json} Auth-Example:
                  { "authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle" }
- * @apiSuccess {Array} HabitArray Array of habit objects, each object has habit_name property, category_name and id
+ * @apiSuccess (Success 200) {Array} HabitArray Array of habit objects, each object has habit_name property, category_name and id
  * @apiSuccessExample Success-Response:
  *     200 OK
  * [
@@ -182,8 +188,11 @@ module.exports = router;
 
 /**
  * @api {post} /api/habits/user Post New Habit To User
+ * @apiVersion 1.0.0
  * @apiName PostUserHabits
  * @apiGroup Habits
+ * @apiExample Request
+ * axios.post('/api/habits/user', {habit_name: "Save Rohan", category_name: "relationships"});
  * @apiHeader (token) {String} authorization Token from login
  * @apiHeaderExample {json} Auth-Example:
                  { "authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle" }
@@ -194,7 +203,7 @@ module.exports = router;
           "habit_name": "Save Rohan",
           "category_name": "relationships"
         }
- * @apiSuccess {Array} HabitArray Array of habit objects, including the new habit, each object has habit_name property, category_name, userHAbit_id and habit_id
+ * @apiSuccess (Success 200) {Array} HabitArray Array of habit objects, including the new habit, each object has habit_name property, category_name, userHAbit_id and habit_id
  * @apiSuccessExample Success-Response:
  *     201 OK
  *     [
@@ -248,8 +257,11 @@ module.exports = router;
 
 /**
  * @api {put} /api/habits/user/:userHabit_id Update the User's Habit
+ * @apiVersion 1.0.0
  * @apiName PutUserHabits
  * @apiGroup Habits
+ * @apiExample Request
+ * axios.put('/api/habits/user/:3', { habit_name: "Walk into Mordor", "category_name": "Fitness"});
  * @apiHeader (token) {String} authorization Token from login
  * @apiHeaderExample {json} Auth-Example:
                  { "authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle" }
@@ -263,7 +275,7 @@ module.exports = router;
  *     }
  * @apiParamExample {Number} Request-PArams-Example:
  *     "/api/habits/user/3"
- * @apiSuccess {Array} HabitArray Array of habit objects, including the new habit, each object has habit_name property, category_name userHabit_id and habit_id
+ * @apiSuccess (Success 200) {Array} HabitArray Array of habit objects, including the new habit, each object has habit_name property, category_name userHabit_id and habit_id
  * @apiSuccessExample Success-Response:
  *     201 OK
  *     [
@@ -314,15 +326,18 @@ module.exports = router;
 
 /**
  * @api {delete} /api/habits/user/:userHabit_id Delete the User's Habit
+ * @apiVersion 1.0.0
  * @apiName DeleteUserHabits
  * @apiGroup Habits
+ * @apiExample Request
+ * axios.delete('/api/habits/user/1');
  * @apiHeader (token) {String} authorization Token from login
  * @apiHeaderExample {json} Auth-Example:
                  { "authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle" }
  * @apiParam (Params) {Number} userHabit_id The id of the userHabit relationship you want to delete
  * @apiParamExample {Number} Request-PArams-Example:
  *     "/api/habits/user/3"
- * @apiSuccess {Array} HabitArray Array of habit objects, minus the deleted habit, each object has habit_name property, category_name and uerHabit_id and habit_id
+ * @apiSuccess (Success 200) {Array} HabitArray Array of habit objects, minus the deleted habit, each object has habit_name property, category_name and uerHabit_id and habit_id
  * @apiSuccessExample Success-Response:
  *     201 OK
  *     [

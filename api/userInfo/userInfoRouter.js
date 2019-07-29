@@ -102,12 +102,15 @@ module.exports = router;
 
 /**
  * @api {get} /api/user-info Get User Info
+ * @apiVersion 1.0.0
  * @apiName GetBasicUserInfo
  * @apiGroup UserInfo
+ * @apiExample Request
+ * axios.get('/api/user-info);
  * @apiHeader (token) {String} authorization Token from login
  * @apiHeaderExample {json} Auth-Example:
                  { "authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle" }
- * @apiSuccess {Object} UserObject Object with user id, username, name and email
+ * @apiSuccess (Success 200) {Object} UserObject Object with user id, username, name and email
  * @apiSuccessExample Success-Response:
  *     200 OK
  *     {
@@ -135,8 +138,15 @@ module.exports = router;
 
 /**
  * @api {put} /api/user-info Update the User Info
+ * @apiVersion 1.0.0
  * @apiName updateUserInfo
  * @apiGroup UserInfo
+ * @apiExample Request
+ * axios.put('/api/user-info', {
+ *        "username": "the_wizard_of_many_colors",
+          "name": "Gandalf",
+          "email": "that_wizard@the_fellowship.com"
+ *     });
  *@apiHeader (token) {String} authorization Token from login
  * @apiHeaderExample {json} Auth-Example:
                  { "authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle" }
@@ -149,7 +159,7 @@ module.exports = router;
           "name": "Gandalf",
           "email": "that_wizard@the_fellowship.com"
  *     }
- * @apiSuccess {Object} UserObject Object with user properties: name email id and username
+ * @apiSuccess (Success 200) {Object} UserObject Object with user properties: name email id and username
  * @apiSuccessExample Success-Response:
  *     200 OK
  *     {
@@ -194,12 +204,15 @@ module.exports = router;
 
 /**
  * @api {delete} /api/user-info Delete the User
+ * @apiVersion 1.0.0
  * @apiName deleteUser
  * @apiGroup UserInfo
+ * @apiExample Request
+ * axios.delete('/api/user-info');
  * @apiHeader (token) {String} authorization Token from login
  * @apiHeaderExample {json} Auth-Example:
                  { "authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle" }
- * @apiSuccess {Object} MessageObject Object with delete success message
+ * @apiSuccess (Success 200) {Object} MessageObject Object with delete success message
  * @apiSuccessExample Success-Response:
  *     200 OK
  *     {
@@ -224,8 +237,14 @@ module.exports = router;
 
 /**
  * @api {put} /api/user-info/password Update the User Password
+ * @apiVersion 1.0.0
  * @apiName updateUserPassword
  * @apiGroup UserInfo
+ * @apiExample Request
+ * axios.put('/api/user-info/password', {
+          "password": "pass",
+	        "new_password": "pass1"
+        });
  *@apiHeader (token) {String} authorization Token from login
  * @apiHeaderExample {json} Auth-Example:
                  { "authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6InRoZV9ncmV5IiwiaWF0IjoxNTY0MjUzODE0LCJle" }
@@ -236,7 +255,7 @@ module.exports = router;
           "password": "pass",
 	        "new_password": "pass1"
         }
- * @apiSuccess {Object} UserObject Object with user properties: name email id and username
+ * @apiSuccess (Success 200) {Object} UserObject Object with user properties: name email id and username
  * @apiSuccessExample Success-Response:
  *     200 OK
  *     {
